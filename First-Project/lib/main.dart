@@ -30,10 +30,12 @@ class _RandomWordsState extends State<RandomWords> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Welcome to Flutter'),
+        actions: [
+          IconButton(icon: const Icon(Icons.list), onPressed: _pushSaved)
+        ],
       ),
       body: _buildSuggestions(),
     );
@@ -63,12 +65,15 @@ class _RandomWordsState extends State<RandomWords> {
         pair.asPascalCase,
         style: _biggerFont,
       ),
-      trailing: Icon( // trailing is the right side of the ListTile
+      trailing: Icon(
+        // trailing is the right side of the ListTile
         alreadySaved ? Icons.favorite : Icons.favorite_border,
         color: alreadySaved ? Colors.red : null,
       ),
-      onTap: () { // onTap is the action when the ListTile is tapped
-        setState(() { // setState() calls build() again
+      onTap: () {
+        // onTap is the action when the ListTile is tapped
+        setState(() {
+          // setState() calls build() again
           if (alreadySaved) {
             _saved.remove(pair);
           } else {
@@ -76,6 +81,38 @@ class _RandomWordsState extends State<RandomWords> {
           }
         });
       },
+    );
+  }
+
+  void _pushSaved() {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (BuildContext context) {
+          // map() is a method that returns an iterable
+          final tiles = _saved.map(
+            (WordPair pair) {
+              return ListTile(
+                title: Text(
+                  pair.asPascalCase,
+                  style: _biggerFont,
+                ),
+              );
+            },
+          );
+
+          // toList() is a method that converts an iterable to a list
+          final divided = tiles.isNotEmpty
+              ? ListTile.divideTiles(context: context, tiles: tiles).toList()
+              : <Widget>[];
+
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text('Saved Suggestions'),
+            ),
+            body: ListView(children: divided),
+          );
+        },
+      )
     );
   }
 }
