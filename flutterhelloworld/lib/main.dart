@@ -2,7 +2,16 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(
-    MaterialApp(
+    const MyApp()
+  );
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
       title: "Hello World App",
       home: Scaffold(
         appBar: AppBar(
@@ -12,8 +21,6 @@ void main() {
           child: Text("Hello World"),
         ),
       ),
-    )
-  );
+    );
+  }
 }
-
-
