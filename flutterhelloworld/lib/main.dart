@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 void main() {
   runApp(const MyApp());
@@ -13,6 +14,8 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String text = '';
+  int luckyNumber = 0;
+  Set luckyNumbers = {};
 
   @override
   void initState() {
@@ -24,7 +27,20 @@ class _MyAppState extends State<MyApp> {
   void btnTap() {
     setState(() {
       text = 'setState: Hi Everyone';
+      luckyNumber = Random().nextInt(10);
+
+      // Loop 6 times
+      for (var i = 0; i < 6; i++) {
+        if (luckyNumbers.length == 6) {
+          break;
+        }
+        luckyNumbers.add(Random().nextInt(55));
+      }
     });
+  }
+
+  void generateTextForLuckyNumbers() {
+    // return luckyNumbers.map((e) => Text(e.toString())).toList();
   }
 
   @override
@@ -40,6 +56,7 @@ class _MyAppState extends State<MyApp> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(text),
+            Image(image: AssetImage('assets/images/dice1.png')),
             ElevatedButton(onPressed: btnTap, child: const Text('Tap Me'))
           ],
         )),
