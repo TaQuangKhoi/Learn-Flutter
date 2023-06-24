@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -86,49 +88,7 @@ class _HomePageState extends State<HomePage> {
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'GO',
-              style: TextStyle(fontSize: 30, color: Colors.green[500]),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.circle,
-                  color: Colors.green[500],
-                  size: 100,
-                ),
-                Icon(
-                  Icons.circle,
-                  color: Colors.yellow[500],
-                  size: 100,
-                ),
-                Icon(
-                  Icons.circle,
-                  color: Colors.red[500],
-                  size: 100,
-                ),
-              ],
-            ),
-            ElevatedButton(onPressed: null, child: Text("Next"))
-          ],
-        ),
+        child: Light(),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
@@ -136,5 +96,104 @@ class _HomePageState extends State<HomePage> {
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+}
+
+class Light extends StatefulWidget {
+  const Light({super.key});
+
+  @override
+  State<Light> createState() => _LightState();
+}
+
+class _LightState extends State<Light> {
+  String light = "green";
+  String instruction = "GO";
+  Color? instructionColor = Colors.green[500];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    light = "green";
+    instruction = "GO";
+    instructionColor = Colors.green[500];
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      // Column is also a layout widget. It takes a list of children and
+      // arranges them vertically. By default, it sizes itself to fit its
+      // children horizontally, and tries to be as tall as its parent.
+      //
+      // Column has various properties to control how it sizes itself and
+      // how it positions its children. Here we use mainAxisAlignment to
+      // center the children vertically; the main axis here is the vertical
+      // axis because Columns are vertical (the cross axis would be
+      // horizontal).
+      //
+      // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
+      // action in the IDE, or press "p" in the console), to see the
+      // wireframe for each widget.
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Text(
+          instruction,
+          style: TextStyle(fontSize: 30, color: instructionColor),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.circle,
+              color: Colors.green[turnOnLight("green")],
+              size: 100,
+            ),
+            Icon(
+              Icons.circle,
+              color: Colors.yellow[turnOnLight("yellow")],
+              size: 100,
+            ),
+            Icon(
+              Icons.circle,
+              color: Colors.red[turnOnLight("red")],
+              size: 100,
+            ),
+          ],
+        ),
+        ElevatedButton(onPressed: changeLight, child: Text("Next"))
+      ],
+    );
+  }
+
+  void changeLight() {
+    setState(() {
+      if (light == "green") {
+        light = "yellow";
+        instruction = "SLOW DOWN";
+        instructionColor = Colors.yellow[500];
+        log("yellow");
+      } else if (light == "yellow") {
+        light = "red";
+        instruction = "STOP";
+        instructionColor = Colors.red[500];
+        log("red");
+      } else {
+        light = "green";
+        instruction = "GO";
+        instructionColor = Colors.green[500];
+        log("green");
+      }
+    });
+  }
+
+  int turnOnLight(String lightActive) {
+    int num = 100;
+    if (light == lightActive) {
+      num = 500;
+    }
+    return num;
   }
 }
