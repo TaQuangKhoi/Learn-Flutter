@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -112,6 +113,9 @@ class _LightState extends State<Light> {
   String instruction = "GO";
   Color? instructionColor = Colors.green[500];
 
+  int _count = 10;
+  Timer? timer;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -124,23 +128,14 @@ class _LightState extends State<Light> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      // Column is also a layout widget. It takes a list of children and
-      // arranges them vertically. By default, it sizes itself to fit its
-      // children horizontally, and tries to be as tall as its parent.
-      //
-      // Column has various properties to control how it sizes itself and
-      // how it positions its children. Here we use mainAxisAlignment to
-      // center the children vertically; the main axis here is the vertical
-      // axis because Columns are vertical (the cross axis would be
-      // horizontal).
-      //
-      // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-      // action in the IDE, or press "p" in the console), to see the
-      // wireframe for each widget.
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Text(
           instruction,
+          style: TextStyle(fontSize: 30, color: instructionColor),
+        ),
+        Text(
+          _count.toString(),
           style: TextStyle(fontSize: 30, color: instructionColor),
         ),
         Row(
@@ -168,7 +163,20 @@ class _LightState extends State<Light> {
     );
   }
 
+  void _startTimer() {
+    timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      setState(() {
+        if (_count > 0) {
+          _count--;
+        } else {
+          timer.cancel();
+        }
+      });
+    });
+  }
+
   void changeLight() {
+    _startTimer();
     setState(() {
       if (light == "green") {
         light = "yellow";
