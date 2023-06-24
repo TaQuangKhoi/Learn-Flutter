@@ -86,7 +86,7 @@ class _HomePageState extends State<HomePage> {
         // the App.build method, and use it to set our appbar title.
         title: const Text("Traffic Light"),
       ),
-      body: Center(
+      body: const Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
         child: Light(),
@@ -116,12 +116,17 @@ class _LightState extends State<Light> {
   int _count = 10;
   Timer? timer;
 
+  String buttonText = "START";
+
   @override
   void initState() {
     // TODO: implement initState
+    _count = 10;
     light = "green";
     instruction = "GO";
     instructionColor = Colors.green[500];
+
+    buttonText = "START";
     super.initState();
   }
 
@@ -158,17 +163,30 @@ class _LightState extends State<Light> {
             ),
           ],
         ),
-        ElevatedButton(onPressed: changeLight, child: Text("Next"))
+        ElevatedButton(onPressed: tapButton, child: Text(buttonText)),
+        ElevatedButton(onPressed: changeLight, child: Text("CHANGE LIGHT"))
       ],
     );
   }
 
-  void _startTimer() {
-    timer = Timer.periodic(Duration(seconds: 1), (timer) {
+  void _startTimer([int? seconds]) {
+    setState(() {
+      if (seconds != null) {
+        _count = seconds;
+      } else if (light == "green") {
+        _count = 30;
+      } else if (light == "yellow") {
+        _count = 3;
+      } else {
+        _count = 15;
+      }
+    });
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         if (_count > 0) {
           _count--;
         } else {
+          changeLight();
           timer.cancel();
         }
       });
@@ -176,7 +194,6 @@ class _LightState extends State<Light> {
   }
 
   void changeLight() {
-    _startTimer();
     setState(() {
       if (light == "green") {
         light = "yellow";
@@ -194,6 +211,56 @@ class _LightState extends State<Light> {
         instructionColor = Colors.green[500];
         log("green");
       }
+    });
+    _startTimer();
+  }
+
+  void tapButton() {
+    if (buttonText == "START") {
+      startLightWork();
+      log("start");
+    } else {
+      stopLightWork();
+      log("stop");
+    }
+  }
+
+  void startLightWork() {
+    setButtonText("STOP");
+    _startTimer();
+  }
+
+  void stopLightWork() {
+    setButtonText("START");
+  }
+
+  void redLightWork() {
+    setState(() {
+      light = "red";
+      instruction = "STOP";
+      instructionColor = Colors.red[500];
+    });
+  }
+
+  void yellowLightWork() {
+    setState(() {
+      light = "yellow";
+      instruction = "SLOW DOWN";
+      instructionColor = Colors.yellow[500];
+    });
+  }
+
+  void greenLightWork() {
+    setState(() {
+      light = "green";
+      instruction = "GO";
+      instructionColor = Colors.green[500];
+    });
+  }
+
+  void setButtonText(String text) {
+    setState(() {
+      buttonText = text;
     });
   }
 
