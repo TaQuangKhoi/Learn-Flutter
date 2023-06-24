@@ -118,6 +118,8 @@ class _LightState extends State<Light> {
 
   String buttonText = "START";
 
+  bool allowWalk = false;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -127,6 +129,8 @@ class _LightState extends State<Light> {
     instructionColor = Colors.green[500];
 
     buttonText = "START";
+
+    allowWalk = false;
     super.initState();
   }
 
@@ -164,12 +168,28 @@ class _LightState extends State<Light> {
           ],
         ),
         ElevatedButton(onPressed: tapButton, child: Text(buttonText)),
-        ElevatedButton(onPressed: changeLight, child: Text("CHANGE LIGHT"))
+        ElevatedButton(onPressed: changeLight, child: const Text("CHANGE LIGHT")),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.directions_walk,
+              size: 100,
+              color: allowWalk ? Colors.green[500] : Colors.black,
+            ),
+            Icon(
+              Icons.directions_walk,
+              size: 100,
+              color: allowWalk ? Colors.black : Colors.red[500]
+            )
+          ],
+        )
       ],
     );
   }
 
   void _startTimer([int? seconds]) {
+
     setState(() {
       if (seconds != null) {
         _count = seconds;
@@ -184,9 +204,13 @@ class _LightState extends State<Light> {
     timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         if (_count > 0) {
+          if (buttonText == "START") {
+            return;
+          }
           _count--;
         } else {
           changeLight();
+          _startTimer(); // After end previous timer
           timer.cancel();
         }
       });
@@ -204,15 +228,16 @@ class _LightState extends State<Light> {
         light = "red";
         instruction = "STOP";
         instructionColor = Colors.red[500];
+        allowWalk = false;
         log("red");
       } else {
         light = "green";
         instruction = "GO";
         instructionColor = Colors.green[500];
+        allowWalk = true;
         log("green");
       }
     });
-    _startTimer();
   }
 
   void tapButton() {
