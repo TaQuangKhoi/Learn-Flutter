@@ -57,6 +57,17 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
+  int score = 0;
+  int tap = 0;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    score = 0;
+    tap = 0;
+    super.initState();
+  }
+
   void _incrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -109,11 +120,11 @@ class _MyHomePageState extends State<MyHomePage> {
               'Score: ',
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
                   Icons.favorite,
                   color: Colors.red,
-                  size: 50,
                 ),
                 Icon(
                   Icons.favorite,
@@ -132,11 +143,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   color: Colors.red,
                 )
               ],
-            )
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
             ),
+            const Text(
+              'Time: ',
+            ),
+            Text(
+              'Tap: ',
+            ),
+            ElevatedButton(onPressed: null, child: Text("Tap Me"))
           ],
         ),
       ),
