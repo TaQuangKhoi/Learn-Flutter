@@ -81,7 +81,65 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: Column()
+      body: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [Text("Test")],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Row(
+                      children: [
+                        ElevatedButton(
+                          onPressed: null,
+                          style: TextButton.styleFrom(
+                            minimumSize: Size(100, 100),
+                            backgroundColor: Colors.blue,
+                          ),
+                          child: Text("AC"),
+                        ),
+                        ElevatedButton(
+                          onPressed: null,
+                          style: TextButton.styleFrom(
+                            minimumSize: Size(100, 100),
+                            backgroundColor: Colors.blue,
+                          ),
+                          child: Text("+/-"),
+                        ),
+                        ElevatedButton(
+                          onPressed: null,
+                          style: TextButton.styleFrom(
+                            minimumSize: Size(100, 100),
+                            backgroundColor: Colors.blue,
+                          ),
+                          child: Text("%"),
+                        ),
+                        ElevatedButton(
+                          onPressed: null,
+                          style: TextButton.styleFrom(
+                            minimumSize: Size(100, 100),
+                            backgroundColor: Colors.blue,
+                          ),
+                          child: Text("+"),
+                        ),
+                      ],
+                    )
+                  ],
+                )
+              ],
+            )
+          ],
+        ),
+      ),
     );
   }
 }
+
+
