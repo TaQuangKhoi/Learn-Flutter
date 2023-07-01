@@ -1,3 +1,4 @@
+import 'package:animals/Question.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -55,18 +56,15 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  Question question1 = Question(
+      q: 'What is the name of this animal?',
+      i: 'https://cdn-icons-png.flaticon.com/512/2194/2194807.png',
+      a: 'Cat',
+      b: 'Dog',
+      c: 'Pig',
+      d: 'Cow',
+      r: 3);
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Container(
                 constraints: const BoxConstraints.expand(height: 200),
                 child: Image.network(
-                    'https://cdn-icons-png.flaticon.com/512/2194/2194807.png'),
+                    question1.imageUrl),
               ),
               Container( // Button 1
                 margin: const EdgeInsets.all(10),
@@ -109,7 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   width: double.infinity,
                   child: TextButton(
                       onPressed: () {},
-                      child: const Text('Button', style: textStyle),
+                      child: Text(question1.answer1, style: textStyle),
                       style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
                               button1Color),
@@ -127,7 +125,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   width: double.infinity,
                   child: TextButton(
                       onPressed: () {},
-                      child: const Text('Button', style: textStyle),
+                      child: Text(question1.answer2, style: textStyle),
                       style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
                               button2Color),
@@ -153,7 +151,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   const RoundedRectangleBorder(
                                       borderRadius: borderRadius,
                                       side: BorderSide(color: button3Color)))),
-                      child: const Text('Button', style: textStyle)),
+                      child: Text(question1.answer3, style: textStyle)),
                 ),
               ),
               Container( // Button 4
@@ -163,7 +161,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   width: double.infinity,
                   child: TextButton(
                       onPressed: () {},
-                      child: const Text('Button', style: textStyle),
+                      child: Text(question1.answer4, style: textStyle),
                       style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
                               button4Color),
