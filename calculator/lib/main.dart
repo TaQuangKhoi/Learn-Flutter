@@ -97,6 +97,45 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: [
                     Row(
                       children: [
+                        Container(
+                          margin: EdgeInsets.all(10),
+                          child: ElevatedButton(
+                            onPressed: null,
+                            style: TextButton.styleFrom(
+                              minimumSize: Size(100, 100),
+                              backgroundColor: Colors.blue,
+                            ),
+                            child: Text("AC"),
+                          ),
+                        ),
+                        ElevatedButton(
+                          onPressed: null,
+                          style: TextButton.styleFrom(
+                            minimumSize: Size(100, 100),
+                            backgroundColor: Colors.blue,
+                          ),
+                          child: Text("+/-"),
+                        ),
+                        ElevatedButton(
+                          onPressed: null,
+                          style: TextButton.styleFrom(
+                            minimumSize: Size(100, 100),
+                            backgroundColor: Colors.blue,
+                          ),
+                          child: Text("%"),
+                        ),
+                        ElevatedButton(
+                          onPressed: null,
+                          style: TextButton.styleFrom(
+                            minimumSize: Size(100, 100),
+                            backgroundColor: Colors.blue,
+                          ),
+                          child: Text("+"),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
                         ElevatedButton(
                           onPressed: null,
                           style: TextButton.styleFrom(
@@ -130,7 +169,100 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: Text("+"),
                         ),
                       ],
-                    )
+                    ),
+                    Row(
+                      children: [
+                        ElevatedButton(
+                          onPressed: null,
+                          style: TextButton.styleFrom(
+                            minimumSize: Size(100, 100),
+                            backgroundColor: Colors.blue,
+                          ),
+                          child: Text("AC"),
+                        ),
+                        ElevatedButton(
+                          onPressed: null,
+                          style: TextButton.styleFrom(
+                            minimumSize: Size(100, 100),
+                            backgroundColor: Colors.blue,
+                          ),
+                          child: Text("+/-"),
+                        ),
+                        ElevatedButton(
+                          onPressed: null,
+                          style: TextButton.styleFrom(
+                            minimumSize: Size(100, 100),
+                            backgroundColor: Colors.blue,
+                          ),
+                          child: Text("%"),
+                        ),
+                        ElevatedButton(
+                          onPressed: null,
+                          style: TextButton.styleFrom(
+                            minimumSize: Size(100, 100),
+                            backgroundColor: Colors.blue,
+                          ),
+                          child: Text("+"),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        ElevatedButton(
+                          onPressed: null,
+                          style: TextButton.styleFrom(
+                            minimumSize: Size(100, 100),
+                            backgroundColor: Colors.blue,
+                          ),
+                          child: Text("AC"),
+                        ),
+                        ElevatedButton(
+                          onPressed: null,
+                          style: TextButton.styleFrom(
+                            minimumSize: Size(100, 100),
+                            backgroundColor: Colors.blue,
+                          ),
+                          child: Text("+/-"),
+                        ),
+                        ElevatedButton(
+                          onPressed: null,
+                          style: TextButton.styleFrom(
+                            minimumSize: Size(100, 100),
+                            backgroundColor: Colors.blue,
+                          ),
+                          child: Text("%"),
+                        ),
+                        ElevatedButton(
+                          onPressed: null,
+                          style: TextButton.styleFrom(
+                            minimumSize: Size(100, 100),
+                            backgroundColor: Colors.blue,
+                          ),
+                          child: Text("+"),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+
+                        ElevatedButton(
+                          onPressed: null,
+                          style: TextButton.styleFrom(
+                            minimumSize: Size(100, 100),
+                            backgroundColor: Colors.blue,
+                          ),
+                          child: Text("%"),
+                        ),
+                        ElevatedButton(
+                          onPressed: null,
+                          style: TextButton.styleFrom(
+                            minimumSize: Size(100, 100),
+                            backgroundColor: Colors.blue,
+                          ),
+                          child: Text("%"),
+                        )
+                      ],
+                    ),
                   ],
                 )
               ],
@@ -141,5 +273,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
-
