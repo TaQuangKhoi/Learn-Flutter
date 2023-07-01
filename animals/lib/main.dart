@@ -70,12 +70,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
+    const TextStyle textStyle = TextStyle(color: Colors.white, fontSize: 20);
+    const button1Color = Color(0xFFff9800);
+    const button2Color = Color(0xFF4caf50);
+    const button3Color = Color(0xFF2196F3);
+    const button4Color = Color(0xFFe91e63);
+    const borderRadius = BorderRadius.all(Radius.circular(5.0));
+
+
     return Scaffold(
       appBar: AppBar(
         // TRY THIS: Try changing the color here to a specific color (to
@@ -95,20 +97,82 @@ class _MyHomePageState extends State<MyHomePage> {
             children: <Widget>[
               Text('Timer: 10'),
               Text('Score: 100'),
-              Image.network(
-                  'https://cdn-icons-png.flaticon.com/512/2194/2194807.png'),
-              Ink(
-                width: double.infinity,
-                height: 100,
-                child: TextButton(
-                    onPressed: () {},
-                    child: const Text('Button'),
-                    style: ButtonStyle(
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(18.0),
-                                    side: BorderSide(color: Colors.red))))),
+              Container(
+                constraints: const BoxConstraints.expand(height: 200),
+                child: Image.network(
+                    'https://cdn-icons-png.flaticon.com/512/2194/2194807.png'),
+              ),
+              Container( // Button 1
+                margin: const EdgeInsets.all(10),
+                constraints: const BoxConstraints(minHeight: 70),
+                child: Ink(
+                  width: double.infinity,
+                  child: TextButton(
+                      onPressed: () {},
+                      child: const Text('Button', style: textStyle),
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              button1Color),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  const RoundedRectangleBorder(
+                                      borderRadius: borderRadius,
+                                      side: BorderSide(color: button1Color))))),
+                ),
+              ),
+              Container( // Button 2
+                margin: const EdgeInsets.all(10),
+                constraints: const BoxConstraints(minHeight: 70),
+                child: Ink(
+                  width: double.infinity,
+                  child: TextButton(
+                      onPressed: () {},
+                      child: const Text('Button', style: textStyle),
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              button2Color),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  const RoundedRectangleBorder(
+                                      borderRadius: borderRadius,
+                                      side: BorderSide(color: button2Color))))),
+                ),
+              ),
+              Container( // Button 3
+                margin: const EdgeInsets.all(10),
+                constraints: const BoxConstraints(minHeight: 70),
+                child: Ink(
+                  width: double.infinity,
+                  child: TextButton(
+                      onPressed: () {},
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              button3Color),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  const RoundedRectangleBorder(
+                                      borderRadius: borderRadius,
+                                      side: BorderSide(color: button3Color)))),
+                      child: const Text('Button', style: textStyle)),
+                ),
+              ),
+              Container( // Button 4
+                margin: const EdgeInsets.all(10),
+                constraints: const BoxConstraints(minHeight: 70),
+                child: Ink(
+                  width: double.infinity,
+                  child: TextButton(
+                      onPressed: () {},
+                      child: const Text('Button', style: textStyle),
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              button4Color),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  const RoundedRectangleBorder(
+                                      borderRadius: borderRadius,
+                                      side: BorderSide(color: button4Color))))),
+                ),
               ),
             ],
           ),
