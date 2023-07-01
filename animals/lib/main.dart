@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:animals/Question.dart';
 import 'package:flutter/material.dart';
 
@@ -94,6 +96,36 @@ class _MyHomePageState extends State<MyHomePage> {
   int index = 1;
   int score = 0;
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    score = 0;
+    super.initState();
+  }
+
+  void updateUI(int buttonNumber) {
+    setState(() {
+      if(checkAnswer(buttonNumber)) {
+        score = score + 5;
+      }
+      if (index < questions.length - 1) {
+        index = index + 1;
+      } else {
+        index = 0;
+      }
+    });
+  }
+
+  bool checkAnswer(int answer) {
+    log("Answer: $answer Right Answer: ${questions[index].rightAnswer}");
+    if (answer == questions[index].rightAnswer) {
+      log('Right!');
+      return true;
+    } else {
+      log('Wrong!');
+      return false;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -104,8 +136,6 @@ class _MyHomePageState extends State<MyHomePage> {
     const button4Color = Color(0xFFe91e63);
     const borderRadius = BorderRadius.all(Radius.circular(5.0));
     
-
-
     return Scaffold(
       appBar: AppBar(
         // TRY THIS: Try changing the color here to a specific color (to
@@ -124,7 +154,7 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text('Timer: 10'),
-              Text('Score: 100'),
+              Text('Score: $score'),
               Container(
                 constraints: const BoxConstraints.expand(height: 200),
                 child: Image.network(
@@ -136,7 +166,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Ink(
                   width: double.infinity,
                   child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {updateUI(1);},
                       child: Text(questions[index].answer1, style: textStyle),
                       style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
@@ -154,7 +184,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Ink(
                   width: double.infinity,
                   child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {updateUI(2);},
                       child: Text(questions[index].answer2, style: textStyle),
                       style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
@@ -172,7 +202,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Ink(
                   width: double.infinity,
                   child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {updateUI(3);},
                       style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
                               button3Color),
@@ -190,7 +220,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Ink(
                   width: double.infinity,
                   child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {updateUI(4);},
                       child: Text(questions[index].answer4, style: textStyle),
                       style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
