@@ -42,3 +42,92 @@ class MyApp extends StatelessWidget {
   }
 }
 
+class DemoElevatedButton extends StatefulWidget {
+  const DemoElevatedButton({super.key});
+
+  @override
+  State<DemoElevatedButton> createState() => _DemoElevatedButtonState();
+}
+
+class _DemoElevatedButtonState extends State<DemoElevatedButton> {
+  String _text = 'Change me';
+
+  void update() {
+    setState(() {
+      _text = 'Button Tapped';
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final ButtonStyle _buttonStyle = ElevatedButton.styleFrom(
+      textStyle: const TextStyle(fontSize: 30),
+      backgroundColor: Colors.teal[500],
+    );
+
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(_text, style: TextStyle(fontSize: 50),),
+          ElevatedButton(
+            onPressed: null,
+            child: const Text('Disabled'),
+            style: _buttonStyle,
+          ),
+          ElevatedButton(
+            onPressed: update,
+            child: const Text('Enabled'),
+            style: _buttonStyle,
+          ),
+        ],
+      )
+    );
+  }
+}
+
+class DemoTextButton extends StatefulWidget {
+  const DemoTextButton({super.key});
+
+  @override
+  State<DemoTextButton> createState() => _DemoTextButtonState();
+}
+
+class _DemoTextButtonState extends State<DemoTextButton> {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          TextButton(
+            style: TextButton.styleFrom(
+              textStyle: const TextStyle(fontSize: 30),
+            ),
+            onPressed: null,
+            child: const Text('Disabled'),
+          ),
+          TextButton(
+            style: TextButton.styleFrom(
+              textStyle: const TextStyle(fontSize: 30),
+            ),
+            onPressed: () {},
+            child: const Text('Enabled'),
+          ),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: TextButton(
+              style: TextButton.styleFrom(
+                textStyle: const TextStyle(fontSize: 30),
+                backgroundColor: Colors.teal[500],
+              ),
+              onPressed: () {},
+              child: const Text('ClipRRect'),
+            ),
+          ),
+        ],
+      )
+    );
+  }
+}
+
