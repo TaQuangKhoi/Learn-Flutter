@@ -56,14 +56,43 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Question question1 = Question(
-      q: 'What is the name of this animal?',
-      i: 'https://cdn-icons-png.flaticon.com/512/2194/2194807.png',
-      a: 'Cat',
-      b: 'Dog',
-      c: 'Pig',
-      d: 'Cow',
-      r: 3);
+  var questions = [
+    Question(
+        q: 'What is the name of this animal?',
+        i: 'https://cdn-icons-png.flaticon.com/512/2194/2194807.png',
+        a: 'Cat',
+        b: 'Dog',
+        c: 'Pig',
+        d: 'Cow',
+        r: 3),
+    Question(
+        q: 'What is the name of this animal?',
+        i: 'https://cdn-icons-png.flaticon.com/512/1998/1998592.png',
+        a: 'Cat',
+        b: 'Dog',
+        c: 'Pig',
+        d: 'Cow',
+        r: 1),
+    Question(
+        q: 'What is the name of this animal?',
+        i: 'https://cdn-icons-png.flaticon.com/512/1998/1998627.png',
+        a: 'Cat',
+        b: 'Dog',
+        c: 'Pig',
+        d: 'Cow',
+        r: 2),
+    Question(
+        q: 'What is the name of this animal?',
+        i: 'https://cdn-icons-png.flaticon.com/512/2395/2395796.png',
+        a: 'Cat',
+        b: 'Dog',
+        c: 'Pig',
+        d: 'Cow',
+        r: 4),
+  ];
+
+  int index = 1;
+  int score = 0;
 
 
   @override
@@ -74,6 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
     const button3Color = Color(0xFF2196F3);
     const button4Color = Color(0xFFe91e63);
     const borderRadius = BorderRadius.all(Radius.circular(5.0));
+    
 
 
     return Scaffold(
@@ -98,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Container(
                 constraints: const BoxConstraints.expand(height: 200),
                 child: Image.network(
-                    question1.imageUrl),
+                    questions[index].imageUrl),
               ),
               Container( // Button 1
                 margin: const EdgeInsets.all(10),
@@ -107,7 +137,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   width: double.infinity,
                   child: TextButton(
                       onPressed: () {},
-                      child: Text(question1.answer1, style: textStyle),
+                      child: Text(questions[index].answer1, style: textStyle),
                       style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
                               button1Color),
@@ -125,7 +155,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   width: double.infinity,
                   child: TextButton(
                       onPressed: () {},
-                      child: Text(question1.answer2, style: textStyle),
+                      child: Text(questions[index].answer2, style: textStyle),
                       style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
                               button2Color),
@@ -151,7 +181,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   const RoundedRectangleBorder(
                                       borderRadius: borderRadius,
                                       side: BorderSide(color: button3Color)))),
-                      child: Text(question1.answer3, style: textStyle)),
+                      child: Text(questions[index].answer3, style: textStyle)),
                 ),
               ),
               Container( // Button 4
@@ -161,7 +191,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   width: double.infinity,
                   child: TextButton(
                       onPressed: () {},
-                      child: Text(question1.answer4, style: textStyle),
+                      child: Text(questions[index].answer4, style: textStyle),
                       style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
                               button4Color),
