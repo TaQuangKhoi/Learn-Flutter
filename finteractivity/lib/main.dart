@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
           title: const Text('Flutter Interactivity'),
           backgroundColor: Colors.teal[300],
         ),
-        body: null,
+        body: DemoTextButton(),
       )
     );
   }
@@ -116,13 +116,31 @@ class _DemoTextButtonState extends State<DemoTextButton> {
           ),
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
-            child: TextButton(
-              style: TextButton.styleFrom(
-                textStyle: const TextStyle(fontSize: 30),
-                backgroundColor: Colors.teal[500],
-              ),
-              onPressed: () {},
-              child: const Text('ClipRRect'),
+            child: Stack(
+              children: <Widget>[
+                Positioned.fill(
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: <Color>[
+                          Color(0xFF14B8A6),
+                          Color(0xFF5EEAD4),
+                          Color(0xFFCCFBF1),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                TextButton(
+                  style: TextButton.styleFrom(
+                    padding: const EdgeInsets.all(16.0),
+                    foregroundColor: Colors.black,
+                    textStyle: const TextStyle(fontSize: 30),
+                  ),
+                  onPressed: () {},
+                  child: const Text('Gradient'),
+                ),
+              ],
             ),
           ),
         ],
@@ -131,3 +149,18 @@ class _DemoTextButtonState extends State<DemoTextButton> {
   }
 }
 
+class DemoIconButton extends StatefulWidget {
+  const DemoIconButton({super.key});
+
+  @override
+  State<DemoIconButton> createState() => _DemoIconButtonState();
+}
+
+class _DemoIconButtonState extends State<DemoIconButton> {
+  double _volume = 0.0;
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
+  }
+}
