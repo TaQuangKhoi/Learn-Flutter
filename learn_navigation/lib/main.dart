@@ -11,7 +11,7 @@ void main() {
       '/second': (context) => const SecondScreen(),
     },
     onGenerateRoute: (settings) {
-      if (settings.name == '/third') {
+      if (settings.name == '/third' || settings.name == '/fourth') {
         final todo = settings.arguments as ToDo;
         return MaterialPageRoute(
           builder: (context) => ThirdScreen(todo: todo),
@@ -51,7 +51,6 @@ class FirstScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 30, color: Colors.black),
               ),
             ),
-
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.purple,
@@ -67,7 +66,23 @@ class FirstScreen extends StatelessWidget {
                 'Third Screen',
                 style: TextStyle(fontSize: 30, color: Colors.black),
               ),
-            )
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green,
+              ),
+              onPressed: () {
+                Navigator.pushNamed(context, '/fourth',
+                    arguments: const ToDo(
+                      title: 'Todo title',
+                      description: 'Todo description - fourth',
+                    ));
+              },
+              child: const Text(
+                'Fourth Screen',
+                style: TextStyle(fontSize: 30, color: Colors.black),
+              ),
+            ),
           ],
         ),
       ),
@@ -140,6 +155,52 @@ class ThirdScreen extends StatelessWidget {
             Text(
               todo.description,
               style: const TextStyle(fontSize: 30, color: Colors.black),
+            ),
+            ElevatedButton(
+              child: const Text(
+                'First Screen',
+                style: TextStyle(fontSize: 30, color: Colors.black),
+              ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.teal,
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class FourthScreen extends StatelessWidget {
+  final ToDo todo;
+
+  const FourthScreen({
+    super.key,
+    required this.todo,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Fourth Screen'),
+        backgroundColor: Colors.green[300],
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              todo.title,
+              style: const TextStyle(fontSize: 35, color: Colors.red),
+            ),
+            Text(
+              todo.description,
+              style: const TextStyle(fontSize: 20, color: Colors.teal),
             ),
             ElevatedButton(
               child: const Text(
