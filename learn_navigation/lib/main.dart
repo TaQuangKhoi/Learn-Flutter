@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MaterialApp(
+  runApp(MaterialApp(
     title: 'Route',
-    home: FirstScreen(),
+    home: const FirstScreen(),
+    routes: {
+      '/first': (context) => const FirstScreen(),
+      '/second': (context) => const SecondScreen(),
+    },
   ));
 }
 
@@ -27,10 +31,7 @@ class FirstScreen extends StatelessWidget {
             backgroundColor: Colors.orange[300],
           ),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const SecondScreen()),
-            );
+            Navigator.pushNamed(context, '/second');
           },
         ),
       ),
