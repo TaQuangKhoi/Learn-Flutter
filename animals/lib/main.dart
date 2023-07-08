@@ -45,7 +45,7 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with AfterLayoutMixin<MyHomePage> {
   var questions = [
     Question(
         q: 'What is the name of this animal?',
@@ -83,7 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   int index = 1;
   int score = 0;
-  int count = 0;
+  int count = 10;
   Timer? timer;
 
   @override
@@ -93,16 +93,23 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
   }
 
-  void updateUI(int buttonNumber) {
+  void updateUIWithAnswer(int buttonNumber) {
     setState(() {
       if(checkAnswer(buttonNumber)) {
         score = score + 5;
       }
+    });
+    nextQuestion();
+  }
+
+  void nextQuestion() {
+    setState(() {
       if (index < questions.length - 1) {
         index = index + 1;
       } else {
         index = 0;
       }
+      _startTimer(10);
     });
   }
 
@@ -112,6 +119,9 @@ class _MyHomePageState extends State<MyHomePage> {
       setState(() {
         if (count > 0) {
           count--;
+        } else {
+          nextQuestion();
+          timer.cancel();
         }
       });
     });
@@ -154,7 +164,7 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text('Timer: 10'),
+              Text('Timer: $count'),
               Text('Score: $score'),
               Container(
                 constraints: const BoxConstraints.expand(height: 200),
@@ -167,7 +177,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Ink(
                   width: double.infinity,
                   child: TextButton(
-                      onPressed: () {updateUI(1);},
+                      onPressed: () {updateUIWithAnswer(1);},
                       child: Text(questions[index].answer1, style: textStyle),
                       style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
@@ -185,7 +195,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Ink(
                   width: double.infinity,
                   child: TextButton(
-                      onPressed: () {updateUI(2);},
+                      onPressed: () {updateUIWithAnswer(2);},
                       child: Text(questions[index].answer2, style: textStyle),
                       style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
@@ -203,7 +213,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Ink(
                   width: double.infinity,
                   child: TextButton(
-                      onPressed: () {updateUI(3);},
+                      onPressed: () {updateUIWithAnswer(3);},
                       style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
                               button3Color),
@@ -221,7 +231,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Ink(
                   width: double.infinity,
                   child: TextButton(
-                      onPressed: () {updateUI(4);},
+                      onPressed: () {updateUIWithAnswer(4);},
                       child: Text(questions[index].answer4, style: textStyle),
                       style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
@@ -238,5 +248,12 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
     );
+  }
+
+  @override
+  FutureOr<void> afterFirstLayout(BuildContext context) {
+    // TODO: implement afterFirstLayout
+    _startTimer(10);
+    throw UnimplementedError();
   }
 }
