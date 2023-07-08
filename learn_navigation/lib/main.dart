@@ -26,10 +26,10 @@ class FirstScreen extends StatelessWidget {
             backgroundColor: Colors.orange[300],
           ),
           onPressed: () {
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => const SecondScreen()),
-            // );
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const SecondScreen()),
+            );
           },
         ),
       ),
@@ -54,7 +54,7 @@ class SecondScreen extends StatelessWidget {
             backgroundColor: Colors.teal,
           ),
           onPressed: () {
-            // Navigator.pop(context);
+            Navigator.pop(context);
           },
         ),
       ),
