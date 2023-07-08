@@ -8,6 +8,22 @@ class ByNumber extends StatefulWidget {
 }
 
 class _ByNumberState extends State<ByNumber> {
+  late TextEditingController _textController;
+  String _nameOfMale = '';
+  String _nameOfFemale = '';
+
+  @override
+  void initState() {
+    _textController = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _textController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,7 +31,71 @@ class _ByNumberState extends State<ByNumber> {
           title: const Text('By Number'),
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         ),
-        body: Placeholder()
-    );
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                // Beautiful container
+                width: double.infinity,
+                height: 300,
+                decoration: BoxDecoration(
+                  color: Colors.pink[100],
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: Colors.pink,
+                    width: 3,
+                  ),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Name of Male', style: TextStyle(fontSize: 30)),
+                    TextField(
+                      controller: _textController,
+                      style: const TextStyle(fontSize: 30),
+                      onChanged: (text) {
+                        setState(() {
+                          _nameOfMale = text;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                // Beautiful container
+                width: double.infinity,
+                height: 300,
+                decoration: BoxDecoration(
+                  color: Colors.pink[100],
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: Colors.pink,
+                    width: 3,
+                  ),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Name of Female',
+                      style: TextStyle(fontSize: 30),
+                    ),
+                    TextField(
+                      controller: _textController,
+                      style: const TextStyle(fontSize: 30),
+                      onChanged: (text) {
+                        setState(() {
+                          _nameOfFemale = text;
+                        });
+                      },
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ));
   }
 }

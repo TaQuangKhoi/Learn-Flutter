@@ -21,6 +21,7 @@ class _HomePageState extends State<HomePage> {
           children: <Widget>[
             const Text(
               'How would you like to find your love fortune?',
+              style: TextStyle(fontSize: 30, color: Colors.pink, fontWeight: FontWeight.bold),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
