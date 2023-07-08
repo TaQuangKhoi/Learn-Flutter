@@ -46,3 +46,17 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+class DemoSwitch extends StatefulWidget {
+  const DemoSwitch({super.key});
+
+  @override
+  State<DemoSwitch> createState() => _DemoSwitchState();
+}
+
+class _DemoSwitchState extends State<DemoSwitch> {
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
+  }
+}
