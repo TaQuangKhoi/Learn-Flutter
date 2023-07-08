@@ -1,4 +1,10 @@
+import 'dart:async';
+import 'dart:developer';
+
+import 'package:animals/Question.dart';
 import 'package:flutter/material.dart';
+
+import 'package:after_layout/after_layout.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,25 +19,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Animals',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a blue toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Flutter Animals'),
     );
   }
 }
@@ -54,28 +45,108 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class _MyHomePageState extends State<MyHomePage> with AfterLayoutMixin<MyHomePage> {
+  var questions = [
+    Question(
+        q: 'What is the name of this animal?',
+        i: 'https://cdn-icons-png.flaticon.com/512/2194/2194807.png',
+        a: 'Cat',
+        b: 'Dog',
+        c: 'Pig',
+        d: 'Cow',
+        r: 3),
+    Question(
+        q: 'What is the name of this animal?',
+        i: 'https://cdn-icons-png.flaticon.com/512/1998/1998592.png',
+        a: 'Cat',
+        b: 'Dog',
+        c: 'Pig',
+        d: 'Cow',
+        r: 1),
+    Question(
+        q: 'What is the name of this animal?',
+        i: 'https://cdn-icons-png.flaticon.com/512/1998/1998627.png',
+        a: 'Cat',
+        b: 'Dog',
+        c: 'Pig',
+        d: 'Cow',
+        r: 2),
+    Question(
+        q: 'What is the name of this animal?',
+        i: 'https://cdn-icons-png.flaticon.com/512/2395/2395796.png',
+        a: 'Cat',
+        b: 'Dog',
+        c: 'Pig',
+        d: 'Cow',
+        r: 4),
+  ];
 
-  void _incrementCounter() {
+  int index = 1;
+  int score = 0;
+  int count = 10;
+  Timer? timer;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    score = 0;
+    super.initState();
+  }
+
+  void updateUIWithAnswer(int buttonNumber) {
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
+      if(checkAnswer(buttonNumber)) {
+        score = score + 5;
+      }
     });
+    nextQuestion();
+  }
+
+  void nextQuestion() {
+    setState(() {
+      if (index < questions.length - 1) {
+        index = index + 1;
+      } else {
+        index = 0;
+      }
+      _startTimer(10);
+    });
+  }
+
+  void _startTimer(int seconds) {
+    count = seconds;
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {
+        if (count > 0) {
+          count--;
+        } else {
+          nextQuestion();
+          timer.cancel();
+        }
+      });
+    });
+  }
+
+  bool checkAnswer(int answer) {
+    log("Answer: $answer Right Answer: ${questions[index].rightAnswer}");
+    if (answer == questions[index].rightAnswer) {
+      log('Right!');
+      return true;
+    } else {
+      log('Wrong!');
+      return false;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
+    const TextStyle textStyle = TextStyle(color: Colors.white, fontSize: 20);
+    const button1Color = Color(0xFFff9800);
+    const button2Color = Color(0xFF4caf50);
+    const button3Color = Color(0xFF2196F3);
+    const button4Color = Color(0xFFe91e63);
+    const borderRadius = BorderRadius.all(Radius.circular(5.0));
+    
     return Scaffold(
       appBar: AppBar(
         // TRY THIS: Try changing the color here to a specific color (to
@@ -87,39 +158,102 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+        child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text('Timer: $count'),
+              Text('Score: $score'),
+              Container(
+                constraints: const BoxConstraints.expand(height: 200),
+                child: Image.network(
+                    questions[index].imageUrl),
+              ),
+              Container( // Button 1
+                margin: const EdgeInsets.all(10),
+                constraints: const BoxConstraints(minHeight: 70),
+                child: Ink(
+                  width: double.infinity,
+                  child: TextButton(
+                      onPressed: () {updateUIWithAnswer(1);},
+                      child: Text(questions[index].answer1, style: textStyle),
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              button1Color),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  const RoundedRectangleBorder(
+                                      borderRadius: borderRadius,
+                                      side: BorderSide(color: button1Color))))),
+                ),
+              ),
+              Container( // Button 2
+                margin: const EdgeInsets.all(10),
+                constraints: const BoxConstraints(minHeight: 70),
+                child: Ink(
+                  width: double.infinity,
+                  child: TextButton(
+                      onPressed: () {updateUIWithAnswer(2);},
+                      child: Text(questions[index].answer2, style: textStyle),
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              button2Color),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  const RoundedRectangleBorder(
+                                      borderRadius: borderRadius,
+                                      side: BorderSide(color: button2Color))))),
+                ),
+              ),
+              Container( // Button 3
+                margin: const EdgeInsets.all(10),
+                constraints: const BoxConstraints(minHeight: 70),
+                child: Ink(
+                  width: double.infinity,
+                  child: TextButton(
+                      onPressed: () {updateUIWithAnswer(3);},
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              button3Color),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  const RoundedRectangleBorder(
+                                      borderRadius: borderRadius,
+                                      side: BorderSide(color: button3Color)))),
+                      child: Text(questions[index].answer3, style: textStyle)),
+                ),
+              ),
+              Container( // Button 4
+                margin: const EdgeInsets.all(10),
+                constraints: const BoxConstraints(minHeight: 70),
+                child: Ink(
+                  width: double.infinity,
+                  child: TextButton(
+                      onPressed: () {updateUIWithAnswer(4);},
+                      child: Text(questions[index].answer4, style: textStyle),
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              button4Color),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  const RoundedRectangleBorder(
+                                      borderRadius: borderRadius,
+                                      side: BorderSide(color: button4Color))))),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  @override
+  FutureOr<void> afterFirstLayout(BuildContext context) {
+    // TODO: implement afterFirstLayout
+    _startTimer(10);
+    throw UnimplementedError();
   }
 }
