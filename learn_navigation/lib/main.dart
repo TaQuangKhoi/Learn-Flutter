@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'ToDo.dart';
+
 void main() {
   runApp(MaterialApp(
     title: 'Route',
@@ -27,7 +29,11 @@ class FirstScreen extends StatelessWidget {
             backgroundColor: Colors.orange[300],
           ),
           onPressed: () {
-            Navigator.pushNamed(context, '/second');
+            Navigator.pushNamed(context, '/second',
+                arguments: const ToDo(
+                  title: 'First Screen',
+                  description: 'This is the first screen',
+                ));
           },
           child: const Text(
             'Second Screen',
@@ -44,25 +50,39 @@ class SecondScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final todo = ModalRoute.of(context)!.settings.arguments as ToDo;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Second Screen'),
         backgroundColor: Colors.orange[300],
       ),
       body: Center(
-        child: ElevatedButton(
-          child: const Text(
-            'First Screen',
-            style: TextStyle(fontSize: 30, color: Colors.black),
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            todo.title,
+            style: const TextStyle(fontSize: 30, color: Colors.black),
           ),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.teal,
+          Text(
+            todo.description,
+            style: const TextStyle(fontSize: 30, color: Colors.black),
           ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
+          ElevatedButton(
+            child: const Text(
+              'First Screen',
+              style: TextStyle(fontSize: 30, color: Colors.black),
+            ),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.teal,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          )
+        ],
+      )),
     );
   }
 }
