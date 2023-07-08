@@ -73,8 +73,27 @@ class _DemoTextFieldState extends State<DemoTextField> {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          TextField(
+            controller: _textController,
+            style: const TextStyle(fontSize: 30),
+            onChanged: (text) {
+              setState(() {
+                _text = text;
+              });
+            },
+          ),
+          Text(
+            _text,
+            style: const TextStyle(fontSize: 30),
+          ),
+          ElevatedButton(onPressed: () {}, child: Text('Submit Text', style: TextStyle(fontSize: 30),)),
+          Text(
+            'Hi $_textSubmit',
+            style: const TextStyle(fontSize: 30),
+          ),
+        ],
       ),
     );
   }
 }
-
