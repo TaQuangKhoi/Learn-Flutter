@@ -23,16 +23,16 @@ class FirstScreen extends StatelessWidget {
       ),
       body: Center(
         child: ElevatedButton(
-          child: const Text(
-            'Second Screen',
-            style: TextStyle(fontSize: 30, color: Colors.black),
-          ),
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.orange[300],
           ),
           onPressed: () {
             Navigator.pushNamed(context, '/second');
           },
+          child: const Text(
+            'Second Screen',
+            style: TextStyle(fontSize: 30, color: Colors.black),
+          ),
         ),
       ),
     );
