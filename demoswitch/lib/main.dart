@@ -36,12 +36,7 @@ class MyApp extends StatelessWidget {
           title: const Text('Flutter Form'),
           backgroundColor: Colors.teal[300],
         ),
-        body: const Center(
-          child: Text(
-            'Hello World',
-            style: TextStyle(fontSize: 24),
-          ),
-        ),
+        body: DemoSwitch(),
       ),
     );
   }
@@ -55,8 +50,44 @@ class DemoSwitch extends StatefulWidget {
 }
 
 class _DemoSwitchState extends State<DemoSwitch> {
+  bool _isOn = false;
+  bool _isOnSubmit = false;
+
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SwitchListTile(
+            value: _isOn,
+            onChanged: (bool? value) {
+              setState(() {
+                _isOn = value!;
+              });
+            },
+            title: const Text('Option', style: TextStyle(fontSize: 30)),
+          ),
+          Text(
+            'Switch is ${_isOn ? 'on' : 'off'}',
+            style: const TextStyle(fontSize: 30),
+          ),
+          ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  _isOnSubmit = _isOn;
+                });
+              },
+              child: Text(
+                'Submit Switch',
+                style: TextStyle(fontSize: 30),
+              )),
+          Text(
+            _isOnSubmit ? 'Turned on' : 'Turned off',
+            style: const TextStyle(fontSize: 30),
+          ),
+        ],
+      ),
+    );
   }
 }
