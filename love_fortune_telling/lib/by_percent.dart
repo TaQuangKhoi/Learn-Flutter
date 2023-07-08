@@ -10,6 +10,11 @@ class ByPercent extends StatefulWidget {
 class _ByPercentState extends State<ByPercent> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text('By Percent'),
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        ),
+        body: Placeholder());
   }
 }

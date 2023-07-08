@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:love_fortune_telling/by_number.dart';
+import 'package:love_fortune_telling/by_percent.dart';
 
 import 'home_page.dart';
 
@@ -19,6 +21,10 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: HomePage(),
+      routes: {
+        '/by_number': (context) => ByNumber(),
+        '/by_percent': (context) => ByPercent(),
+      },
     );
   }
 }

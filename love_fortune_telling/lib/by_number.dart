@@ -10,6 +10,12 @@ class ByNumber extends StatefulWidget {
 class _ByNumberState extends State<ByNumber> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text('By Number'),
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        ),
+        body: Placeholder()
+    );
   }
 }
