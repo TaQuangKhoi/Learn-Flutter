@@ -10,6 +10,11 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Love Fortune Telling'),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+      ),
+    );
   }
 }
