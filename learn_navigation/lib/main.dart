@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(
-    const MaterialApp(
-     title: 'Route',
-      home: FirstScreen(),
-    )
-  );
+  runApp(const MaterialApp(
+    title: 'Route',
+    home: FirstScreen(),
+  ));
 }
 
 class FirstScreen extends StatelessWidget {
@@ -21,7 +19,10 @@ class FirstScreen extends StatelessWidget {
       ),
       body: Center(
         child: ElevatedButton(
-          child: const Text('Second Screen', style: TextStyle(fontSize: 30, color: Colors.black),),
+          child: const Text(
+            'Second Screen',
+            style: TextStyle(fontSize: 30, color: Colors.black),
+          ),
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.orange[300],
           ),
@@ -49,7 +50,10 @@ class SecondScreen extends StatelessWidget {
       ),
       body: Center(
         child: ElevatedButton(
-          child: const Text('First Screen', style: TextStyle(fontSize: 30, color: Colors.black),),
+          child: const Text(
+            'First Screen',
+            style: TextStyle(fontSize: 30, color: Colors.black),
+          ),
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.teal,
           ),
@@ -61,4 +65,3 @@ class SecondScreen extends StatelessWidget {
     );
   }
 }
-
