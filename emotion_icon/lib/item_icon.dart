@@ -10,13 +10,35 @@ class ItemIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
 
       children: [
-        Text(emoji.code),
-        Text(emoji.name),
-        ElevatedButton(onPressed: () {}, child: const Icon(Icons.edit)),
-        ElevatedButton(onPressed: () {}, child: const Icon(Icons.delete)),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Text(emoji.name,
+              style: const TextStyle(
+                fontSize: 30,
+                fontFamily: 'EmojiOne',
+              ),
+            ),
+            Text(emoji.code,
+              style: const TextStyle(
+                fontSize: 30,
+                fontFamily: 'EmojiOne',
+              ),
+            ),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            ElevatedButton(onPressed: () {}, child: const Icon(Icons.edit)),
+            ElevatedButton(onPressed: () {
+              emojis.remove(emoji);
+            }, child: const Icon(Icons.delete)),
+          ],
+        ),
       ],
     );
   }
