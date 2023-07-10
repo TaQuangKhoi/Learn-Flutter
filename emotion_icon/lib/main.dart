@@ -35,8 +35,8 @@ class MyApp extends StatelessWidget {
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
       routes: {
-        '/create': (context) => const CreateUpdateEmojiPage(),
-        '/update': (context) => const CreateUpdateEmojiPage(),
+        '/create': (context) => const CreateUpdateEmojiPage(mode: 'create'),
+        '/update': (context) => const CreateUpdateEmojiPage(mode: 'update'),
       },
     );
   }

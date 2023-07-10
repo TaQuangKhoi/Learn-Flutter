@@ -52,13 +52,43 @@ class _CreateUpdateEmojiPageState extends State<CreateUpdateEmojiPage> {
             ),
             Container(
               margin: const EdgeInsets.all(10),
-              child: const TextField(
-                decoration: InputDecoration(
+              child: TextField(
+                controller: _textController,
+                onChanged: (text) {
+                  if (text == '') {
+                    setState(() {
+                      notiText = '';
+                    });
+                    return;
+                  }
+
+                  setState(() {
+                    if (parser.hasEmoji(text) || parser.hasName(text)) {
+                      notiText = 'This is an emoji';
+                      emojiNameOrCode = text;
+                    } else {
+                      notiText = 'This is not an emoji';
+                    }
+                  });
+                },
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Emoji Name or Code',
                 ),
               ),
-            )
+            ),
+            Text(notiText),
+            ElevatedButton(
+                onPressed: () => {
+                      if (widget.mode == 'create')
+                        {Navigator.pop(context, emojiNameOrCode)}
+                      else
+                        {Navigator.pop(context, emojiNameOrCode)}
+                    },
+                child: const Text(
+                  'Submit Text',
+                  style: TextStyle(fontSize: 30),
+                )),
           ],
         ),
       ),

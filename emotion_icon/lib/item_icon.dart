@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_emoji/flutter_emoji.dart';
 
+import 'create_update_page.dart';
+
 class ItemIcon extends StatelessWidget {
   final Emoji emoji;
-  final Function removeEmoji;
+  final Function(String) removeEmoji;
 
   const ItemIcon({super.key, required this.emoji, required this.removeEmoji});
 
@@ -18,13 +20,13 @@ class ItemIcon extends StatelessWidget {
             Text(emoji.name,
               style: const TextStyle(
                 fontSize: 30,
-                fontFamily: 'EmojiOne',
+                fontFamily: 'Agdasima',
               ),
             ),
             Text(emoji.code,
               style: const TextStyle(
                 fontSize: 30,
-                fontFamily: 'EmojiOne',
+                fontFamily: 'Twemoji',
               ),
             ),
           ],
@@ -32,7 +34,17 @@ class ItemIcon extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            ElevatedButton(onPressed: () {}, child: const Icon(Icons.edit)),
+            ElevatedButton(onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CreateUpdateEmojiPage(
+                    mode: 'update',
+                    updateEmojiName: emoji.name,
+                  ),
+                ),
+              );
+            }, child: const Icon(Icons.edit)),
             ElevatedButton(onPressed: () {
               removeEmoji(emoji.name);
             }, child: const Icon(Icons.delete)),
