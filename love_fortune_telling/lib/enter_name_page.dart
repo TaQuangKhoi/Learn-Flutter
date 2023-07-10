@@ -129,7 +129,7 @@ class _EnterNamePageState extends State<EnterNamePage> {
                     ),
                   ),
                 );
-              }, child: const Text('Submit'))
+              }, child: const Text('Submit', style: TextStyle(fontSize: 30)))
             ],
           ),
         ));
