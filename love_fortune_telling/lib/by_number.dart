@@ -36,11 +36,11 @@ class _ByNumberState extends State<ByNumber> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                // Beautiful container
+                margin: const EdgeInsets.all(10),
                 width: double.infinity,
                 height: 300,
                 decoration: BoxDecoration(
-                  color: Colors.pink[100],
+                  color: Colors.red[100],
                   borderRadius: BorderRadius.circular(20),
                   border: Border.all(
                     color: Colors.pink,
@@ -50,7 +50,14 @@ class _ByNumberState extends State<ByNumber> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Name of Male', style: TextStyle(fontSize: 30)),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text('Name of Male',
+                            style: TextStyle(fontSize: 30)),
+                        Icon(Icons.male, color: Colors.pink, size: 30),
+                      ],
+                    ),
                     TextField(
                       controller: _textController,
                       style: const TextStyle(fontSize: 30),
@@ -64,7 +71,7 @@ class _ByNumberState extends State<ByNumber> {
                 ),
               ),
               Container(
-                // Beautiful container
+                margin: const EdgeInsets.all(10),
                 width: double.infinity,
                 height: 300,
                 decoration: BoxDecoration(
