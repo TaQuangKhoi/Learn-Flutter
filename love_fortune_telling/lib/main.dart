@@ -22,8 +22,8 @@ class MyApp extends StatelessWidget {
       ),
       home: HomePage(),
       routes: {
-        '/by_number': (context) => ByNumber(),
-        '/by_percent': (context) => ByPercent(),
+        '/by_number': (context) => const ByNumber(mode: 1,),
+        '/by_percent': (context) => const ByNumber(mode: 2,),
       },
     );
   }
