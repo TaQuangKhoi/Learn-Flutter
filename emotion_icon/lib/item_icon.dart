@@ -3,15 +3,14 @@ import 'package:flutter_emoji/flutter_emoji.dart';
 
 class ItemIcon extends StatelessWidget {
   final Emoji emoji;
-  final emojis;
+  final Function removeEmoji;
 
-  const ItemIcon({super.key, required this.emoji, this.emojis});
+  const ItemIcon({super.key, required this.emoji, required this.removeEmoji});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
-
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -35,7 +34,7 @@ class ItemIcon extends StatelessWidget {
           children: [
             ElevatedButton(onPressed: () {}, child: const Icon(Icons.edit)),
             ElevatedButton(onPressed: () {
-              emojis.remove(emoji);
+              removeEmoji(emoji.name);
             }, child: const Icon(Icons.delete)),
           ],
         ),
