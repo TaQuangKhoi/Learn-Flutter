@@ -53,6 +53,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   var emojis = <Emoji>[];
+  var parser = EmojiParser();
 
   @override
   void initState() {
@@ -71,6 +72,18 @@ class _MyHomePageState extends State<MyHomePage> {
   void _deleteEmoji(String emojiToDelete) {
     setState(() {
       emojis.removeWhere((emoji) => emoji.name == emojiToDelete);
+    });
+  }
+  
+  void _addEmoji(String emojiToAdd) {
+    setState(() {
+      emojis.add(parser.getEmoji(emojiToAdd));
+    });
+  }
+  
+  void _updateEmoji(int idToUpdate, String emojiToUpdate) {
+    setState(() {
+      emojis[idToUpdate] = parser.getEmoji(emojiToUpdate);
     });
   }
 
