@@ -22,6 +22,9 @@ class _CreateUpdateEmojiPageState extends State<CreateUpdateEmojiPage> {
   void initState() {
     _textController = TextEditingController();
     notiText = '';
+    if (widget.mode == 'update') {
+      _textController.text = widget.updateEmojiName;
+    }
     super.initState();
   }
 
@@ -35,12 +38,18 @@ class _CreateUpdateEmojiPageState extends State<CreateUpdateEmojiPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Create/Update Emoji'),
+        title: Text(widget.mode == 'create' ? 'Create Emoji' : 'Update Emoji'),
       ),
       body: Center(
         child: Column(
           children: [
-            const Text('Create/Update Emoji'),
+            Text(
+              widget.mode == 'create' ? 'Create Emoji' : 'Update Emoji',
+              style: const TextStyle(
+                fontSize: 30,
+                fontFamily: 'Agdasima',
+              ),
+            ),
             Container(
               margin: const EdgeInsets.all(10),
               child: const TextField(
