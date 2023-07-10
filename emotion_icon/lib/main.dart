@@ -1,7 +1,10 @@
+import 'package:emotion_icon/item_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_emoji/flutter_emoji.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+
+import 'create_update_page.dart';
 
 void main() async {
   // Avoid errors caused by flutter upgrade.
@@ -31,6 +34,10 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      routes: {
+        '/create': (context) => const CreateUpdateEmojiPage(),
+        '/update': (context) => const CreateUpdateEmojiPage(),
+      },
     );
   }
 }
@@ -82,12 +89,15 @@ class _MyHomePageState extends State<MyHomePage> {
           child: ListView.builder(
               itemCount: emojis.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(emojis[index].name),
-                  subtitle: Text(emojis[index].code),
-                );
+                return ItemIcon(emoji: emojis[index]);
               })),
-
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, '/create');
+        },
+        tooltip: 'Add Emoji',
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }
