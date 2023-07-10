@@ -40,12 +40,12 @@ jobs:
         working-directory: ./traffic_light
       
       # Build :D 
-      - run: flutter build aot
+      - run: flutter build apk
         working-directory: ./traffic_light
 
-      - name: Install dependencies
-        run: flutter pub get
-        working-directory: ./traffic_light
+#       - name: Install dependencies
+#         run: flutter pub get
+#         working-directory: ./traffic_light
         
         
 
