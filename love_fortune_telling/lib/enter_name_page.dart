@@ -118,6 +118,16 @@ class _EnterNamePageState extends State<EnterNamePage> {
                   ],
                 ),
               ),
+              ElevatedButton(onPressed: () {
+                Navigator.push(
+                  context,
+                  Route
+                  arguments: {
+                    'nameOfMale': _nameOfMale,
+                    'nameOfFemale': _nameOfFemale,
+                  },
+                )
+              }, child: child)
             ],
           ),
         ));
