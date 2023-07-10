@@ -10,6 +10,13 @@ class CreateUpdateEmojiPage extends StatefulWidget {
 class _CreateUpdateEmojiPageState extends State<CreateUpdateEmojiPage> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Create/Update Emoji'),
+      ),
+      body: const Center(
+        child: Text('Create/Update Emoji'),
+      ),
+    );
   }
 }
