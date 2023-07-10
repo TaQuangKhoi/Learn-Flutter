@@ -40,7 +40,7 @@ class ItemIcon extends StatelessWidget {
                 MaterialPageRoute(
                   builder: (context) => CreateUpdateEmojiPage(
                     mode: 'update',
-                    updateEmojiName: emoji.name,
+                    emojiNameToUpdate: emoji.name,
                   ),
                 ),
               );

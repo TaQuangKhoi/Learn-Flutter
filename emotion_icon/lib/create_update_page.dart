@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_emoji/flutter_emoji.dart';
 
 class CreateUpdateEmojiPage extends StatefulWidget {
-  const CreateUpdateEmojiPage({super.key, required this.mode, this.updateEmojiName = ''});
+  const CreateUpdateEmojiPage({super.key, required this.mode, this.emojiNameToUpdate = ''});
 
   final String mode;
-  final String updateEmojiName;
+  final String emojiNameToUpdate;
 
   @override
   State<CreateUpdateEmojiPage> createState() => _CreateUpdateEmojiPageState();
@@ -23,7 +23,7 @@ class _CreateUpdateEmojiPageState extends State<CreateUpdateEmojiPage> {
     _textController = TextEditingController();
     notiText = '';
     if (widget.mode == 'update') {
-      _textController.text = widget.updateEmojiName;
+      _textController.text = widget.emojiNameToUpdate;
     }
     super.initState();
   }
