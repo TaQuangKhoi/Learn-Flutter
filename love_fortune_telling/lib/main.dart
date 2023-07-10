@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:love_fortune_telling/by_number.dart';
+import 'package:love_fortune_telling/enter_name_page.dart';
 import 'package:love_fortune_telling/by_percent.dart';
 
 import 'home_page.dart';
