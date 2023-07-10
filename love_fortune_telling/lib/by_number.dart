@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ByNumber extends StatefulWidget {
-  const ByNumber({super.key});
+  final int mode;
+
+  const ByNumber({super.key, required this.mode});
 
   @override
   State<ByNumber> createState() => _ByNumberState();
@@ -12,6 +14,8 @@ class _ByNumberState extends State<ByNumber> {
   late TextEditingController _femaleTextController;
   String _nameOfMale = '';
   String _nameOfFemale = '';
+
+  double padding = 20.0;
 
   @override
   void initState() {
@@ -31,15 +35,18 @@ class _ByNumberState extends State<ByNumber> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('By Number'),
+          title: Text(widget.mode == 1 ? 'By Number' : 'By Percent'),
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         ),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Text(widget.mode == 1 ? "Enter your name and your partner's name" : "Enter your fullname and your partner's fullname",
+                  style: const TextStyle(fontSize: 30)),
               Container(
                 margin: const EdgeInsets.all(10),
+                padding: EdgeInsets.all(padding),
                 width: double.infinity,
                 height: 300,
                 decoration: BoxDecoration(
@@ -75,6 +82,7 @@ class _ByNumberState extends State<ByNumber> {
               ),
               Container(
                 margin: const EdgeInsets.all(10),
+                padding: EdgeInsets.all(padding),
                 width: double.infinity,
                 height: 300,
                 decoration: BoxDecoration(
