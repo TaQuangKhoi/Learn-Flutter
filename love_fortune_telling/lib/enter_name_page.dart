@@ -127,7 +127,7 @@ class _EnterNamePageState extends State<EnterNamePage> {
                     'nameOfFemale': _nameOfFemale,
                   },
                 )
-              }, child: child)
+              }, child: const Text('Submit'))
             ],
           ),
         ));

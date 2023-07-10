@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 
 class ResultPage extends StatefulWidget {
-  const ResultPage({super.key});
+  final String nameOfMale;
+  final String nameOfFemale;
+
+  const ResultPage({super.key,
+    required this.nameOfMale,
+    required this.nameOfFemale,
+  });
 
   @override
   State<ResultPage> createState() => _ResultPageState();
