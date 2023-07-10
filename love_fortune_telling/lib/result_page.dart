@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class ByPercent extends StatefulWidget {
-  const ByPercent({super.key});
+class ResultPage extends StatefulWidget {
+  const ResultPage({super.key});
 
   @override
-  State<ByPercent> createState() => _ByPercentState();
+  State<ResultPage> createState() => _ResultPageState();
 }
 
-class _ByPercentState extends State<ByPercent> {
+class _ResultPageState extends State<ResultPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
