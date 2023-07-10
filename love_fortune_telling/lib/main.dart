@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:love_fortune_telling/enter_name_page.dart';
-import 'package:love_fortune_telling/by_percent.dart';
 
 import 'home_page.dart';
 
@@ -20,10 +19,10 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: HomePage(),
+      home: const HomePage(),
       routes: {
-        '/by_number': (context) => const ByNumber(mode: 1,),
-        '/by_percent': (context) => const ByNumber(mode: 2,),
+        '/by_number': (context) => const EnterNamePage(mode: 1,),
+        '/by_percent': (context) => const EnterNamePage(mode: 2,),
       },
     );
   }

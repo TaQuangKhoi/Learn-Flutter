@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class ByNumber extends StatefulWidget {
+class EnterNamePage extends StatefulWidget {
   final int mode;
 
-  const ByNumber({super.key, required this.mode});
+  const EnterNamePage({super.key, required this.mode});
 
   @override
-  State<ByNumber> createState() => _ByNumberState();
+  State<EnterNamePage> createState() => _EnterNamePageState();
 }
 
-class _ByNumberState extends State<ByNumber> {
+class _EnterNamePageState extends State<EnterNamePage> {
   late TextEditingController _maleTextController;
   late TextEditingController _femaleTextController;
   String _nameOfMale = '';
