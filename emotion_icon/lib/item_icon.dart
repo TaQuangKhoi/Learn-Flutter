@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_emoji/flutter_emoji.dart';
 
 class ItemIcon extends StatelessWidget {
-  const ItemIcon({super.key});
+  final Emoji emoji;
+  final emojis;
+
+  const ItemIcon({super.key, required this.emoji, this.emojis});
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
       children: [
-        Icon(
-          Icons.favorite,
-          color: Colors.pink,
-          size: 100,
-        ),
-        Text(
-          'Hello World',
-          style: TextStyle(fontSize: 30),
-        ),
+        Text(emoji.code),
+        Text(emoji.name),
+        ElevatedButton(onPressed: () {}, child: const Icon(Icons.edit)),
+        ElevatedButton(onPressed: () {}, child: const Icon(Icons.delete)),
       ],
     );
   }
