@@ -14,8 +14,21 @@ class _CreateUpdateEmojiPageState extends State<CreateUpdateEmojiPage> {
       appBar: AppBar(
         title: const Text('Create/Update Emoji'),
       ),
-      body: const Center(
-        child: Text('Create/Update Emoji'),
+      body: Center(
+        child: Column(
+          children: [
+            const Text('Create/Update Emoji'),
+            Container(
+              margin: const EdgeInsets.all(10),
+              child: const TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Emoji Name or Code',
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
