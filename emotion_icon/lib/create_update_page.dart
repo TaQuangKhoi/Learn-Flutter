@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_emoji/flutter_emoji.dart';
 
 class CreateUpdateEmojiPage extends StatefulWidget {
-  const CreateUpdateEmojiPage({super.key});
+  const CreateUpdateEmojiPage({super.key, required this.mode, this.updateEmojiName = ''});
+
+  final String mode;
+  final String updateEmojiName;
 
   @override
   State<CreateUpdateEmojiPage> createState() => _CreateUpdateEmojiPageState();
