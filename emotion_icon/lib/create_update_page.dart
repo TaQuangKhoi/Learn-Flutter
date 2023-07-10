@@ -88,7 +88,12 @@ class _CreateUpdateEmojiPageState extends State<CreateUpdateEmojiPage> {
                       if (widget.mode == 'create')
                         {Navigator.pop(context, emojiNameOrCode)}
                       else
-                        {Navigator.pop(context, emojiNameOrCode)}
+                        {Navigator.pop(context,
+                            [
+                              emojiNameOrCode,
+                              widget.idToUpdate,
+                            ]
+                        )}
                     },
                 child: const Text(
                   'Submit Text',
