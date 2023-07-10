@@ -21,6 +21,20 @@ class _ResultPageState extends State<ResultPage> {
           title: const Text('By Percent'),
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         ),
-        body: Placeholder());
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                widget.nameOfMale,
+                style: const TextStyle(fontSize: 30, color: Colors.black),
+              ),
+              Text(
+                widget.nameOfFemale,
+                style: const TextStyle(fontSize: 30, color: Colors.black),
+              ),
+            ],
+          ),
+        ));
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:love_fortune_telling/result_page.dart';
 
 class EnterNamePage extends StatefulWidget {
   final int mode;
@@ -121,12 +122,13 @@ class _EnterNamePageState extends State<EnterNamePage> {
               ElevatedButton(onPressed: () {
                 Navigator.push(
                   context,
-                  Route
-                  arguments: {
-                    'nameOfMale': _nameOfMale,
-                    'nameOfFemale': _nameOfFemale,
-                  },
-                )
+                  MaterialPageRoute(
+                    builder: (context) => ResultPage(
+                      nameOfMale: _nameOfMale,
+                      nameOfFemale: _nameOfFemale,
+                    ),
+                  ),
+                );
               }, child: const Text('Submit'))
             ],
           ),
