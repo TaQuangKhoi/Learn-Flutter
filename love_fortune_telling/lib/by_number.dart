@@ -8,19 +8,22 @@ class ByNumber extends StatefulWidget {
 }
 
 class _ByNumberState extends State<ByNumber> {
-  late TextEditingController _textController;
+  late TextEditingController _maleTextController;
+  late TextEditingController _femaleTextController;
   String _nameOfMale = '';
   String _nameOfFemale = '';
 
   @override
   void initState() {
-    _textController = TextEditingController();
+    _maleTextController = TextEditingController();
+    _femaleTextController = TextEditingController();
     super.initState();
   }
 
   @override
   void dispose() {
-    _textController.dispose();
+    _maleTextController.dispose();
+    _femaleTextController.dispose();
     super.dispose();
   }
 
@@ -59,7 +62,7 @@ class _ByNumberState extends State<ByNumber> {
                       ],
                     ),
                     TextField(
-                      controller: _textController,
+                      controller: _maleTextController,
                       style: const TextStyle(fontSize: 30),
                       onChanged: (text) {
                         setState(() {
@@ -85,12 +88,18 @@ class _ByNumberState extends State<ByNumber> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      'Name of Female',
-                      style: TextStyle(fontSize: 30),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Name of Female',
+                          style: TextStyle(fontSize: 30),
+                        ),
+                        Icon(Icons.female, color: Colors.pink, size: 30),
+                      ],
                     ),
                     TextField(
-                      controller: _textController,
+                      controller: _femaleTextController,
                       style: const TextStyle(fontSize: 30),
                       onChanged: (text) {
                         setState(() {
