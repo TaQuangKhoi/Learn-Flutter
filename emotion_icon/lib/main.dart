@@ -52,15 +52,27 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var emojis = <Emoji>[
-    Emoji('coffee', '☕'),
-    Emoji('heart', '❤️'),
-    Emoji('party', '🎉'),
-    Emoji('sun', '☀️'),
-    Emoji('moon', '🌙'),
-    Emoji('star', '⭐'),
-    Emoji('cloud', '☁️'),
-  ];
+  var emojis = <Emoji>[];
+
+  @override
+  void initState() {
+    emojis = <Emoji>[
+      Emoji('coffee', '☕'),
+      Emoji('heart', '❤️'),
+      Emoji('party', '🎉'),
+      Emoji('sun', '☀️'),
+      Emoji('moon', '🌙'),
+      Emoji('star', '⭐'),
+      Emoji('cloud', '☁️'),
+    ];
+    super.initState();
+  }
+
+  void _deleteEmoji(String emojiToDelete) {
+    setState(() {
+      emojis.removeWhere((emoji) => emoji.name == emojiToDelete);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
           child: ListView.builder(
               itemCount: emojis.length,
               itemBuilder: (context, index) {
-                return ItemIcon(emoji: emojis[index]);
+                return ItemIcon(emoji: emojis[index], removeEmoji: _deleteEmoji,);
               })),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
