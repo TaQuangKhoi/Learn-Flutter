@@ -60,10 +60,10 @@ class _ByNumberState extends State<ByNumber> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text('Name of Male',
+                        Text('Name of Male',
                             style: TextStyle(fontSize: 30)),
                         Icon(Icons.male, color: Colors.pink, size: 30),
                       ],
@@ -96,7 +96,7 @@ class _ByNumberState extends State<ByNumber> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
