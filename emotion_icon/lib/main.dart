@@ -1,6 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_emoji/flutter_emoji.dart';
+import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
 
 void main() async {
+  // Avoid errors caused by flutter upgrade.
+  // Importing 'package:flutter/widgets.dart' is required.
+  // WidgetsFlutterBinding.ensureInitialized();
+  // Open the database and store the reference.
+  // final database = openDatabase(
+  // Set the path to the database. Note: Using the `join` function from the
+  // `path` package is best practice to ensure the path is correctly
+  // constructed for each platform.
+  //   join(await getDatabasesPath(), 'emojis_database.db'),
+  // );
+
   runApp(const MyApp());
 }
 
@@ -63,44 +77,17 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: ListView(
-          children: const [
-            Row(
-              children: [
-                Icon(
-                  Icons.favorite,
-                  color: Colors.pink,
-                  size: 100,
-                ),
-                Text(
-                  'Hello World',
-                  style: TextStyle(fontSize: 30),
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.favorite,
-                  color: Colors.pink,
-                  size: 100,
-                ),
-                Text(
-                  'Hello World',
-                  style: TextStyle(fontSize: 30),
-                ),
-              ],
-            )
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+          // Center is a layout widget. It takes a single child and positions it
+          // in the middle of the parent.
+          child: ListView.builder(
+              itemCount: emojis.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(emojis[index].name),
+                  subtitle: Text(emojis[index].code),
+                );
+              })),
+
     );
   }
 }
