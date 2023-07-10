@@ -1,5 +1,5 @@
-class Emoji {
+class _Emoji {
   final String name;
 
-  const Emoji(this.name);
+  const _Emoji(this.name);
 }
