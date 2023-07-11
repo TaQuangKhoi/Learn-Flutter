@@ -37,15 +37,15 @@ jobs:
       
       # Get flutter packages
       - run: flutter pub get
-        working-directory: ./traffic_light
+        working-directory: ./emotion_icon
       
       # Build :D 
       - run: flutter build apk
-        working-directory: ./traffic_light
+        working-directory: ./emotion_icon
 
 #       - name: Install dependencies
 #         run: flutter pub get
-#         working-directory: ./traffic_light
+#         working-directory: ./emotion_icon
         
         
 
@@ -56,11 +56,11 @@ jobs:
       # Consider passing '--fatal-infos' for slightly stricter analysis.
 #       - name: Analyze project source
 #         run: dart analyze
-#         working-directory: ./traffic_light
+#         working-directory: ./emotion_icon
 
       # Your project will need to have tests in test/ and a dependency on
       # package:test for this step to succeed. Note that Flutter projects will
       # want to change this to 'flutter test'.
 #       - name: Run tests
 #         run: dart test
-#         working-directory: ./traffic_light
+#         working-directory: ./emotion_icon
