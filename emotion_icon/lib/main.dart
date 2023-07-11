@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:emotion_icon/item_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_emoji/flutter_emoji.dart';
@@ -115,8 +117,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 }),
           )),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, '/create');
+        onPressed: () async {
+          final newEmoji = await Navigator.pushNamed(context, '/create');
+          log(newEmoji.toString());
+          if (newEmoji != null) {
+            setState(() {
+              emojis.add(parser.get(newEmoji.toString()));
+            });
+          }
         },
         tooltip: 'Add Emoji',
         child: const Icon(Icons.add),

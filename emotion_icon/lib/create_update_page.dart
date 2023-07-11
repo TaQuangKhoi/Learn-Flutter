@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_emoji/flutter_emoji.dart';
 
+import 'dart:developer';
+
 class CreateUpdateEmojiPage extends StatefulWidget {
   const CreateUpdateEmojiPage(
       {super.key,
@@ -67,14 +69,24 @@ class _CreateUpdateEmojiPageState extends State<CreateUpdateEmojiPage> {
                     return;
                   }
 
+                  var isEmoji = parser.hasEmoji(text);
+                  var isName = parser.hasName(text);
+                  log('isEmoji: $isEmoji - isName: $isName');
+
                   setState(() {
-                    if (parser.hasEmoji(text) || parser.hasName(text)) {
+                    if (isEmoji) {
                       notiText = 'This is an emoji';
+                      emojiNameOrCode = parser.getEmoji(text).name;
+                    } else if (isName) {
+                      notiText = 'This is an emoji name';
                       emojiNameOrCode = text;
-                    } else {
+                    }
+                    else {
                       notiText = 'This is not an emoji';
                     }
                   });
+
+                  log('emojiNameOrCode: $emojiNameOrCode');
                 },
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
