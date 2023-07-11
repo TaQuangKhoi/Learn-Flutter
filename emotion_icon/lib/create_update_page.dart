@@ -41,6 +41,34 @@ class _CreateUpdateEmojiPageState extends State<CreateUpdateEmojiPage> {
     super.dispose();
   }
 
+  void checkEmojiNameOrCode(text) {
+    if (text == '') {
+      setState(() {
+        notiText = '';
+      });
+      return;
+    }
+
+    var isEmoji = parser.hasEmoji(text);
+    var isName = parser.hasName(text);
+    log('isEmoji: $isEmoji - isName: $isName');
+
+    setState(() {
+      if (isEmoji) {
+        notiText = 'This is an emoji';
+        emojiNameOrCode = parser.getEmoji(text).name;
+      } else if (isName) {
+        notiText = 'This is an emoji name';
+        emojiNameOrCode = text;
+      }
+      else {
+        notiText = 'This is not an emoji';
+      }
+    });
+
+    log('emojiNameOrCode: $emojiNameOrCode');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,33 +89,7 @@ class _CreateUpdateEmojiPageState extends State<CreateUpdateEmojiPage> {
               margin: const EdgeInsets.all(10),
               child: TextField(
                 controller: _textController,
-                onChanged: (text) {
-                  if (text == '') {
-                    setState(() {
-                      notiText = '';
-                    });
-                    return;
-                  }
-
-                  var isEmoji = parser.hasEmoji(text);
-                  var isName = parser.hasName(text);
-                  log('isEmoji: $isEmoji - isName: $isName');
-
-                  setState(() {
-                    if (isEmoji) {
-                      notiText = 'This is an emoji';
-                      emojiNameOrCode = parser.getEmoji(text).name;
-                    } else if (isName) {
-                      notiText = 'This is an emoji name';
-                      emojiNameOrCode = text;
-                    }
-                    else {
-                      notiText = 'This is not an emoji';
-                    }
-                  });
-
-                  log('emojiNameOrCode: $emojiNameOrCode');
-                },
+                onChanged: (text) => checkEmojiNameOrCode(text),
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Emoji Name or Code',
