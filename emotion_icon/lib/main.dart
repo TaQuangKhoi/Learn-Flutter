@@ -83,9 +83,9 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void _updateEmoji(int idToUpdate, String emojiToUpdate) {
+  void _updateEmoji(int idToUpdate, String newEmoji) {
     setState(() {
-      emojis[idToUpdate] = parser.getEmoji(emojiToUpdate);
+      emojis[idToUpdate] = parser.get(newEmoji);
     });
   }
 

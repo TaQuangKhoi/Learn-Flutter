@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_emoji/flutter_emoji.dart';
 
@@ -17,6 +19,22 @@ class ItemIcon extends StatelessWidget {
       required this.addEmoji,
       required this.updateEmoji,
       required this.index});
+
+  void update(BuildContext context) async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => CreateUpdateEmojiPage(
+          mode: 'update',
+          emojiNameToUpdate: emoji.name,
+        ),
+      ),
+    );
+
+    log('result: $result');
+
+    updateEmoji(index, result[0]);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,17 +69,7 @@ class ItemIcon extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CreateUpdateEmojiPage(
-                            mode: 'update',
-                            emojiNameToUpdate: emoji.name,
-                          ),
-                        ),
-                      );
-                    },
+                    onPressed: () => update(context),
                     child: const Icon(Icons.edit)),
                 ElevatedButton(
                     onPressed: () {
