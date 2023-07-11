@@ -100,17 +100,20 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-          child: ListView.builder(
-              itemCount: emojis.length,
-              itemBuilder: (context, index) {
-                return ItemIcon(
-                  index: index,
-                  emoji: emojis[index],
-                  removeEmoji: _deleteEmoji,
-                  addEmoji: _addEmoji,
-                  updateEmoji: _updateEmoji,
-                );
-              })),
+          child: Container(
+            margin: const EdgeInsets.all(6),
+            child: ListView.builder(
+                itemCount: emojis.length,
+                itemBuilder: (context, index) {
+                  return ItemIcon(
+                    index: index,
+                    emoji: emojis[index],
+                    removeEmoji: _deleteEmoji,
+                    addEmoji: _addEmoji,
+                    updateEmoji: _updateEmoji,
+                  );
+                }),
+          )),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.pushNamed(context, '/create');
