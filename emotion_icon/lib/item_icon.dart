@@ -4,6 +4,7 @@ import 'package:flutter_emoji/flutter_emoji.dart';
 import 'create_update_page.dart';
 
 class ItemIcon extends StatelessWidget {
+  final int index;
   final Emoji emoji;
   final Function(String) removeEmoji;
   final Function(String) addEmoji;
@@ -14,7 +15,7 @@ class ItemIcon extends StatelessWidget {
       required this.emoji,
       required this.removeEmoji,
       required this.addEmoji,
-      required this.updateEmoji});
+      required this.updateEmoji, required this.index});
 
   @override
   Widget build(BuildContext context) {

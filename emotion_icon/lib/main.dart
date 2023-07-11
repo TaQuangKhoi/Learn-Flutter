@@ -106,6 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
               itemCount: emojis.length,
               itemBuilder: (context, index) {
                 return ItemIcon(
+                  index: index,
                   emoji: emojis[index],
                   removeEmoji: _deleteEmoji,
                   addEmoji: _addEmoji,
