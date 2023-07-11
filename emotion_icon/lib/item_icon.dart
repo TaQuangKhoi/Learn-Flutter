@@ -6,8 +6,15 @@ import 'create_update_page.dart';
 class ItemIcon extends StatelessWidget {
   final Emoji emoji;
   final Function(String) removeEmoji;
+  final Function(String) addEmoji;
+  final Function(int, String) updateEmoji;
 
-  const ItemIcon({super.key, required this.emoji, required this.removeEmoji});
+  const ItemIcon(
+      {super.key,
+      required this.emoji,
+      required this.removeEmoji,
+      required this.addEmoji,
+      required this.updateEmoji});
 
   @override
   Widget build(BuildContext context) {
@@ -17,13 +24,15 @@ class ItemIcon extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text(emoji.name,
+            Text(
+              emoji.name,
               style: const TextStyle(
                 fontSize: 30,
                 fontFamily: 'Agdasima',
               ),
             ),
-            Text(emoji.code,
+            Text(
+              emoji.code,
               style: const TextStyle(
                 fontSize: 30,
                 fontFamily: 'Twemoji',
@@ -34,24 +43,27 @@ class ItemIcon extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            ElevatedButton(onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => CreateUpdateEmojiPage(
-                    mode: 'update',
-                    emojiNameToUpdate: emoji.name,
-                  ),
-                ),
-              );
-            }, child: const Icon(Icons.edit)),
-            ElevatedButton(onPressed: () {
-              removeEmoji(emoji.name);
-            }, child: const Icon(Icons.delete)),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CreateUpdateEmojiPage(
+                        mode: 'update',
+                        emojiNameToUpdate: emoji.name,
+                      ),
+                    ),
+                  );
+                },
+                child: const Icon(Icons.edit)),
+            ElevatedButton(
+                onPressed: () {
+                  removeEmoji(emoji.name);
+                },
+                child: const Icon(Icons.delete)),
           ],
         ),
       ],
     );
   }
 }
-

@@ -74,13 +74,13 @@ class _MyHomePageState extends State<MyHomePage> {
       emojis.removeWhere((emoji) => emoji.name == emojiToDelete);
     });
   }
-  
+
   void _addEmoji(String emojiToAdd) {
     setState(() {
       emojis.add(parser.getEmoji(emojiToAdd));
     });
   }
-  
+
   void _updateEmoji(int idToUpdate, String emojiToUpdate) {
     setState(() {
       emojis[idToUpdate] = parser.getEmoji(emojiToUpdate);
@@ -105,7 +105,12 @@ class _MyHomePageState extends State<MyHomePage> {
           child: ListView.builder(
               itemCount: emojis.length,
               itemBuilder: (context, index) {
-                return ItemIcon(emoji: emojis[index], removeEmoji: _deleteEmoji,);
+                return ItemIcon(
+                  emoji: emojis[index],
+                  removeEmoji: _deleteEmoji,
+                  addEmoji: _addEmoji,
+                  updateEmoji: _updateEmoji,
+                );
               })),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
