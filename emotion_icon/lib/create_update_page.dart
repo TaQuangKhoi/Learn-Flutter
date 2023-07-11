@@ -60,13 +60,23 @@ class _CreateUpdateEmojiPageState extends State<CreateUpdateEmojiPage> {
       } else if (isName) {
         notiText = 'This is an emoji name';
         emojiNameOrCode = text;
-      }
-      else {
+      } else {
         notiText = 'This is not an emoji';
       }
     });
 
     log('emojiNameOrCode: $emojiNameOrCode');
+  }
+
+  void submit() {
+    if (widget.mode == 'create') {
+      Navigator.pop(context, emojiNameOrCode);
+    } else {
+      Navigator.pop(context, [
+        emojiNameOrCode,
+        widget.idToUpdate,
+      ]);
+    }
   }
 
   @override
@@ -98,17 +108,7 @@ class _CreateUpdateEmojiPageState extends State<CreateUpdateEmojiPage> {
             ),
             Text(notiText),
             ElevatedButton(
-                onPressed: () => {
-                      if (widget.mode == 'create')
-                        {Navigator.pop(context, emojiNameOrCode)}
-                      else
-                        {Navigator.pop(context,
-                            [
-                              emojiNameOrCode,
-                              widget.idToUpdate,
-                            ]
-                        )}
-                    },
+                onPressed: submit,
                 child: const Text(
                   'Submit Text',
                   style: TextStyle(fontSize: 30),
