@@ -40,15 +40,15 @@ jobs:
       
       # Get flutter packages
       - run: flutter pub get
-        working-directory: $WD
+        working-directory: ${{ env.WD }}
       
       # Build :D 
       - run: flutter build apk
-        working-directory: $WD
+        working-directory: ${{ env.WD }}
 
 #       - name: Install dependencies
 #         run: flutter pub get
-#         working-directory: $WD
+#         working-directory: ${{ env.WD }}
         
         
 
@@ -59,11 +59,11 @@ jobs:
       # Consider passing '--fatal-infos' for slightly stricter analysis.
 #       - name: Analyze project source
 #         run: dart analyze
-#         working-directory: $WD
+#         working-directory: ${{ env.WD }}
 
       # Your project will need to have tests in test/ and a dependency on
       # package:test for this step to succeed. Note that Flutter projects will
       # want to change this to 'flutter test'.
 #       - name: Run tests
 #         run: dart test
-#         working-directory: $WD
+#         working-directory: ${{ env.WD }}
