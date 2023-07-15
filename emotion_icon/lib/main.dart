@@ -46,7 +46,7 @@ void main() async {
 }
 
 void checkTable() async {
-  var db = getEmojiDatabase() as Database;
+  var db = await getEmojiDatabase();
 
   var emoji1 = const h_Emoji('coffee');
 
