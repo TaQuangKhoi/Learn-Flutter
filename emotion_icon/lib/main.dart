@@ -14,26 +14,28 @@ import 'create_update_page.dart';
 void main() async {
   var factory = databaseFactoryFfiWeb;
 
-  var databasePath = await getDatabasesPath();
-
-  var path = join(databasePath, 'emojis_database.db');
+  var path = 'emojis_database.db';
 
   var db = await factory.openDatabase(path);
 
   var sqliteVersion =
       (await db.rawQuery('select sqlite_version()')).first.values.first;
-  print(sqliteVersion); // should print 3.39.3
+  print(sqliteVersion);
 
-  // Avoid errors caused by flutter upgrade.
-  // Importing 'package:flutter/widgets.dart' is required.
-  // WidgetsFlutterBinding.ensureInitialized();
-  // Open the database and store the reference.
-  // final database = openDatabase(
-  // Set the path to the database. Note: Using the `join` function from the
-  // `path` package is best practice to ensure the path is correctly
-  // constructed for each platform.
-  //   join(await getDatabasesPath(), path),
-  // );
+
+  // check if table is existed
+  var isTableExisted = await db
+      .rawQuery("SELECT * FROM sqlite_master WHERE name = 'EmotionIcon'");
+  log(isTableExisted.toString());
+
+  if (isTableExisted.isEmpty) {
+    await db.execute('''
+    CREATE TABLE EmotionIcon (
+        id INTEGER PRIMARY KEY,
+        name TEXT
+    )
+    ''');
+  }
 
   runApp(const MyApp());
 }
