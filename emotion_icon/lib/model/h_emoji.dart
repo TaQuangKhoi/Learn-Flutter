@@ -22,7 +22,7 @@ class h_Emoji {
 }
 
 Future<void> insertEmoji(h_Emoji emoji) async {
-  final db = getEmojiDatabase() as Database;
+  final db = await getEmojiDatabase();
   await db.insert(
     'EmotionIcon',
     emoji.toMap(),
