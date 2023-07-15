@@ -1,4 +1,6 @@
 import 'dart:developer';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
 
 import 'package:emotion_icon/item_icon.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +11,16 @@ import 'package:sqflite/sqflite.dart';
 import 'create_update_page.dart';
 
 void main() async {
+  var factory = databaseFactoryFfiWeb;
+
+  var path = 'emojis_database.db';
+
+  var db = await factory.openDatabase(path);
+
+  var sqliteVersion = (await db.rawQuery('select sqlite_version()')).first.values.first;
+  print(sqliteVersion); // should print 3.39.3
+
+
   // Avoid errors caused by flutter upgrade.
   // Importing 'package:flutter/widgets.dart' is required.
   // WidgetsFlutterBinding.ensureInitialized();
@@ -17,7 +29,7 @@ void main() async {
   // Set the path to the database. Note: Using the `join` function from the
   // `path` package is best practice to ensure the path is correctly
   // constructed for each platform.
-  //   join(await getDatabasesPath(), 'emojis_database.db'),
+  //   join(await getDatabasesPath(), path),
   // );
 
   runApp(const MyApp());
