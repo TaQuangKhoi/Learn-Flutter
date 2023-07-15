@@ -1,5 +1,5 @@
+import 'package:emotion_icon/utils/database_util.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
 
 class h_Emoji {
   final String name;
@@ -18,11 +18,12 @@ class h_Emoji {
   }
 
   Future<void> insertEmoji(h_Emoji emoji, Database database) async {
-    final db = await database;
+    final db = getEmojiDatabase() as Database;
     await db.insert(
       'EmotionIcon',
       emoji.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
+    db.close();
   }
 }
