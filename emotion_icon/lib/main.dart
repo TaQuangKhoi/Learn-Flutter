@@ -126,6 +126,13 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void getEmojis() async {
+    var e = await getAllEmojis();
+    setState(() {
+      emojis = e;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
