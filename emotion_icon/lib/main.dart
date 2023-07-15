@@ -50,7 +50,7 @@ void checkTable() async {
 
   var emoji1 = const h_Emoji('coffee');
 
-  await emoji1.insertEmoji(emoji1, db);
+  await insertEmoji(emoji1);
 
   // query table
   var result = await db.query('EmotionIcon');
