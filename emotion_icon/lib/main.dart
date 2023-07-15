@@ -10,6 +10,7 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'create_update_page.dart';
+import 'model/h_emoji.dart';
 
 void main() async {
   var factory = databaseFactoryFfiWeb;
@@ -37,7 +38,28 @@ void main() async {
     ''');
   }
 
+  db.close();
+
+  checkTable();
+
   runApp(const MyApp());
+}
+
+void checkTable() async {
+  var factory = databaseFactoryFfiWeb;
+
+  var path = 'emojis_database.db';
+
+  var db = await factory.openDatabase(path);
+
+  var emoji1 = const h_Emoji('coffee');
+
+  await emoji1.insertEmoji(emoji1, db);
+
+  // query table
+  var result = await db.query('EmotionIcon');
+
+  log(result.toString());
 }
 
 class MyApp extends StatelessWidget {
