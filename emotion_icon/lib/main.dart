@@ -96,15 +96,19 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
-    emojis = <Emoji>[
-      Emoji('coffee', '☕'),
-      Emoji('heart', '❤️'),
-      Emoji('party', '🎉'),
-      Emoji('sun', '☀️'),
-      Emoji('moon', '🌙'),
-      Emoji('star', '⭐'),
-      Emoji('cloud', '☁️'),
-    ];
+    // emojis = <Emoji>[
+    //   Emoji('coffee', '☕'),
+    //   Emoji('heart', '❤️'),
+    //   Emoji('party', '🎉'),
+    //   Emoji('sun', '☀️'),
+    //   Emoji('moon', '🌙'),
+    //   Emoji('star', '⭐'),
+    //   Emoji('cloud', '☁️'),
+    // ];
+
+    emojis = <Emoji>[];
+
+    // emojis = getAllEmojis() as List<Emoji>;
     super.initState();
   }
 
