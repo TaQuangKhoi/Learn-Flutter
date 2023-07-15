@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
+import 'package:idb_sqflite/idb_sqflite.dart';
 
 import 'package:emotion_icon/item_icon.dart';
 import 'package:flutter/material.dart';
@@ -13,13 +14,15 @@ import 'create_update_page.dart';
 void main() async {
   var factory = databaseFactoryFfiWeb;
 
-  var path = 'emojis_database.db';
+  var databasePath = await getDatabasesPath();
+
+  var path = join(databasePath, 'emojis_database.db');
 
   var db = await factory.openDatabase(path);
 
-  var sqliteVersion = (await db.rawQuery('select sqlite_version()')).first.values.first;
+  var sqliteVersion =
+      (await db.rawQuery('select sqlite_version()')).first.values.first;
   print(sqliteVersion); // should print 3.39.3
-
 
   // Avoid errors caused by flutter upgrade.
   // Importing 'package:flutter/widgets.dart' is required.
@@ -115,19 +118,19 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
           child: Container(
-            margin: const EdgeInsets.all(6),
-            child: ListView.builder(
-                itemCount: emojis.length,
-                itemBuilder: (context, index) {
-                  return ItemIcon(
-                    index: index,
-                    emoji: emojis[index],
-                    removeEmoji: _deleteEmoji,
-                    addEmoji: _addEmoji,
-                    updateEmoji: _updateEmoji,
-                  );
-                }),
-          )),
+        margin: const EdgeInsets.all(6),
+        child: ListView.builder(
+            itemCount: emojis.length,
+            itemBuilder: (context, index) {
+              return ItemIcon(
+                index: index,
+                emoji: emojis[index],
+                removeEmoji: _deleteEmoji,
+                addEmoji: _addEmoji,
+                updateEmoji: _updateEmoji,
+              );
+            }),
+      )),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           final newEmoji = await Navigator.pushNamed(context, '/create');
