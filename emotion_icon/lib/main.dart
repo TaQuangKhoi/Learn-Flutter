@@ -152,6 +152,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     log('build');
 
+    var _future = getEmojisFromFirebase();
+
     return Scaffold(
       appBar: AppBar(
         // TRY THIS: Try changing the color here to a specific color (to
@@ -166,7 +168,7 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Container(
         margin: const EdgeInsets.all(6),
         child: FutureBuilder<List<h_Emoji>>(
-          future: getEmojisFromFirebase(),
+          future: _future,
           builder: (context, snapshot) {
             if (snapshot.hasData && snapshot.data!.isNotEmpty) {
               return ListView.builder(
@@ -193,6 +195,11 @@ class _MyHomePageState extends State<MyHomePage> {
           log(newEmojiName.toString());
           if (newEmojiName != null) {
             await addEmoji(newEmojiName.toString());
+
+            // reload ListView
+            setState(() {
+              _future = getEmojisFromFirebase();
+            });
           }
         },
         tooltip: 'Add Emoji',
