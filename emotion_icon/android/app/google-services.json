@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "209868366155",
+    "project_id": "emotionicon-f4917",
+    "storage_bucket": "emotionicon-f4917.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:209868366155:android:383399423dd32a76cdc8ce",
+        "android_client_info": {
+          "package_name": "com.taquangkhoi.emotion_icon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "209868366155-ke4o1so4mba53j3j4b2oh0cfvpqro0il.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCr49R3A9UxBrUmhv2XVYrthvV8XmZ_5WY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "209868366155-ke4o1so4mba53j3j4b2oh0cfvpqro0il.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
