@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:momentum/momentum.dart';
+
+import 'controllers/gamecontronller.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(Momentum(controllers: [GameController()], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
