@@ -57,6 +57,29 @@ class _DemoDropdownButtonState extends State<DemoDropdownButton> {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Center(
+        child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        DropdownButton(
+          value: _selectedOption,
+          items: items.map((String item) {
+            return DropdownMenuItem(
+              value: item,
+              child: Text(item),
+            );
+          }).toList(),
+          onChanged: (String? newValue) {
+            setState(() {
+              _selectedOption = newValue!;
+            });
+          },
+          style: const TextStyle(
+            fontSize: 30,
+            color: Colors.teal,
+          ),
+        ),
+      ],
+    ));
   }
 }
