@@ -29,6 +29,13 @@
             {
               "client_id": "209868366155-ke4o1so4mba53j3j4b2oh0cfvpqro0il.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "209868366155-0jj5prulc69vlvqhu49ifptfud431rr5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.taquangkhoi.emotionIcon.RunnerTests"
+              }
             }
           ]
         }

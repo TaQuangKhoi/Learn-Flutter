@@ -18,7 +18,8 @@ class ItemIcon extends StatelessWidget {
       required this.removeEmoji,
       required this.addEmoji,
       required this.updateEmoji,
-      required this.index, required this.hEmoji});
+      required this.index,
+      required this.hEmoji});
 
   void update(BuildContext context) async {
     final result = await Navigator.push(

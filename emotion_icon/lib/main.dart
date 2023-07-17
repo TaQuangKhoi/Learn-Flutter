@@ -12,6 +12,9 @@ import 'create_update_page.dart';
 import 'model/h_emoji.dart';
 import 'utils/database_util.dart';
 
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
 void main() async {
   var factory = databaseFactoryFfiWeb;
 
@@ -48,9 +51,9 @@ void main() async {
 void checkTable() async {
   var db = await getEmojiDatabase();
 
-  var emoji1 = const h_Emoji('coffee');
+  // var emoji1 = const h_Emoji('coffee');
 
-  await insertEmoji(emoji1);
+  // await insertEmoji(emoji1);
 
   // query table
   var result = await db.query('EmotionIcon');
@@ -156,7 +159,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       removeEmoji: _deleteEmoji,
                       addEmoji: _addEmoji,
                       updateEmoji: _updateEmoji,
-                      hEmoji: snapshot.data![index],
+                      hEmoji: const h_Emoji('mountain', 1),
                     );
                   });
             } else if (snapshot.hasError) {
