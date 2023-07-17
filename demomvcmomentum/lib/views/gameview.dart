@@ -22,6 +22,21 @@ class GameView extends StatelessWidget {
                 );
               },
               controllers: const [GameController]),
+          MomentumBuilder(
+              builder: (context, snapshot) {
+                var game = snapshot<GameModel>();
+                return Text(
+                  game.formatWord(),
+                  style: const TextStyle(fontSize: 30),
+                );
+              },
+              controllers: const [GameController]),
+          ElevatedButton(
+            onPressed: () {
+              Momentum.controller<GameController>(context).nextWord();
+            },
+            child: const Text('Next Word'),
+          )
         ],
       ),
     );

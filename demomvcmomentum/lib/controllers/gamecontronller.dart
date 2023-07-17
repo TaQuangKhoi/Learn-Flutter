@@ -15,9 +15,9 @@ class GameController extends MomentumController<GameModel> {
 
   void nextWord() {
     wordIndex++;
-    // if (wordIndex >= listOfWords.length) {
-    //   wordIndex = 0;
-    // }
+    if (wordIndex >= listOfWords.length) {
+      wordIndex = 0;
+    }
     model.update(word: listOfWords[wordIndex]);
   }
 }
