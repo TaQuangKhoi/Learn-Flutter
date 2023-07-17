@@ -16,6 +16,15 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 void main() async {
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  runApp(const MyApp());
+}
+
+void createTable () async {
   var factory = databaseFactoryFfiWeb;
 
   var path = 'emojis_database.db';
@@ -23,7 +32,7 @@ void main() async {
   var db = await factory.openDatabase(path);
 
   var sqliteVersion =
-      (await db.rawQuery('select sqlite_version()')).first.values.first;
+  (await db.rawQuery('select sqlite_version()')).first.values.first;
   print(sqliteVersion);
 
 
@@ -33,7 +42,7 @@ void main() async {
   log(isTableExisted.toString());
 
   if (isTableExisted.isEmpty) {
-    await db.execute('''
+  await db.execute('''
     CREATE TABLE EmotionIcon (
         id INTEGER PRIMARY KEY,
         name TEXT
@@ -42,10 +51,6 @@ void main() async {
   }
 
   db.close();
-
-  // checkTable();
-
-  runApp(const MyApp());
 }
 
 void checkTable() async {
