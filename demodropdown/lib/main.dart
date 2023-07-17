@@ -96,6 +96,13 @@ class _DemoDropdownButtonState extends State<DemoDropdownButton> {
               'Submit',
               style: TextStyle(fontSize: 30),
             )),
+        Text(
+          'Submitted option: $_selectedOptionSubmit',
+          style: const TextStyle(
+            fontSize: 30,
+            color: Colors.teal,
+          ),
+        )
       ],
     ));
   }
