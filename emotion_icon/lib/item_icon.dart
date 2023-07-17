@@ -40,7 +40,8 @@ class ItemIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var parser = EmojiParser();
-    var emoji = parser.getEmoji(hEmoji.name);
+    var emoji = parser.get(hEmoji.name);
+    log(emoji.toString());
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,

@@ -1,4 +1,6 @@
 import 'dart:developer';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:emotion_icon/utils/firebase_util.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
 
@@ -21,6 +23,19 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  // var db = FirebaseFirestore.instance;
+
+  // Create a new user with a first and last name
+  // final user = <String, dynamic>{
+  //   "first": "Ada",
+  //   "last": "Lovelace",
+  //   "born": 1815
+  // };
+
+  // Add a new document with a generated ID
+  // db.collection("users").add(user).then((DocumentReference doc) =>
+  //     print('DocumentSnapshot added with ID: ${doc.id}'));
 
   runApp(const MyApp());
 }
@@ -153,8 +168,8 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
           child: Container(
         margin: const EdgeInsets.all(6),
-        child: FutureBuilder<List<Emoji>>(
-          future: getAllEmojis(),
+        child: FutureBuilder<List<h_Emoji>>(
+          future: getEmojisFromFirebase(),
           builder: (context, snapshot) {
             if (snapshot.hasData && snapshot.data!.isNotEmpty) {
               return ListView.builder(
@@ -165,7 +180,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       removeEmoji: _deleteEmoji,
                       addEmoji: _addEmoji,
                       updateEmoji: _updateEmoji,
-                      hEmoji: const h_Emoji('mountain', 1),
+                      hEmoji: snapshot.data![index],
                     );
                   });
             } else if (snapshot.hasError) {

@@ -1,14 +1,14 @@
 import 'dart:developer';
-
 import 'package:emotion_icon/utils/database_util.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:flutter_emoji/flutter_emoji.dart';
 
 class h_Emoji {
   final int id;
-  final String name;
+  final String name; // heart
+  final String code; // Example: ❤️
 
-  const h_Emoji(this.name, this.id);
+  const h_Emoji(this.name, this.id, this.code);
 
   Map<String, dynamic> toMap() {
     return {

@@ -1,15 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:emotion_icon/model/h_emoji.dart';
 import 'package:flutter_emoji/flutter_emoji.dart';
 
-Future<List<Emoji>> getEmojisFromFirebase() async {
+Future<List<h_Emoji>> getEmojisFromFirebase() async {
   var db = FirebaseFirestore.instance;
 
   var emojis = await db.collection('emojis').get();
 
-  // TODO: Return emojis with Emoji type
-  var parser = EmojiParser();
-
   return emojis.docs.map((e) {
-    return parser.get(e.data()['name']);
+    return h_Emoji(e.data()['name'], e.data()['id'], e.data()['code']);
   }).toList();
 }
