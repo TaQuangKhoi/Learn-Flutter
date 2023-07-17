@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
-import 'package:idb_sqflite/idb_sqflite.dart';
 
 import 'package:emotion_icon/item_icon.dart';
 import 'package:flutter/material.dart';
@@ -10,32 +9,55 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'create_update_page.dart';
+import 'model/h_emoji.dart';
+import 'utils/database_util.dart';
 
 void main() async {
   var factory = databaseFactoryFfiWeb;
 
-  var databasePath = await getDatabasesPath();
-
-  var path = join(databasePath, 'emojis_database.db');
+  var path = 'emojis_database.db';
 
   var db = await factory.openDatabase(path);
 
   var sqliteVersion =
       (await db.rawQuery('select sqlite_version()')).first.values.first;
-  print(sqliteVersion); // should print 3.39.3
+  print(sqliteVersion);
 
-  // Avoid errors caused by flutter upgrade.
-  // Importing 'package:flutter/widgets.dart' is required.
-  // WidgetsFlutterBinding.ensureInitialized();
-  // Open the database and store the reference.
-  // final database = openDatabase(
-  // Set the path to the database. Note: Using the `join` function from the
-  // `path` package is best practice to ensure the path is correctly
-  // constructed for each platform.
-  //   join(await getDatabasesPath(), path),
-  // );
+
+  // check if table is existed
+  var isTableExisted = await db
+      .rawQuery("SELECT * FROM sqlite_master WHERE name = 'EmotionIcon'");
+  log(isTableExisted.toString());
+
+  if (isTableExisted.isEmpty) {
+    await db.execute('''
+    CREATE TABLE EmotionIcon (
+        id INTEGER PRIMARY KEY,
+        name TEXT
+    )
+    ''');
+  }
+
+  db.close();
+
+  // checkTable();
 
   runApp(const MyApp());
+}
+
+void checkTable() async {
+  var db = await getEmojiDatabase();
+
+  var emoji1 = const h_Emoji('coffee');
+
+  await insertEmoji(emoji1);
+
+  // query table
+  var result = await db.query('EmotionIcon');
+
+  log(result.toString());
+
+  db.close();
 }
 
 class MyApp extends StatelessWidget {
@@ -74,15 +96,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
-    emojis = <Emoji>[
-      Emoji('coffee', '☕'),
-      Emoji('heart', '❤️'),
-      Emoji('party', '🎉'),
-      Emoji('sun', '☀️'),
-      Emoji('moon', '🌙'),
-      Emoji('star', '⭐'),
-      Emoji('cloud', '☁️'),
-    ];
+    emojis = <Emoji>[];
+
+    // emojis = getAllEmojis() as List<Emoji>;
     super.initState();
   }
 
@@ -104,8 +120,17 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void getEmojis() async {
+    var e = await getAllEmojis();
+    setState(() {
+      emojis = e;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    log('build');
+
     return Scaffold(
       appBar: AppBar(
         // TRY THIS: Try changing the color here to a specific color (to
@@ -119,17 +144,27 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
           child: Container(
         margin: const EdgeInsets.all(6),
-        child: ListView.builder(
-            itemCount: emojis.length,
-            itemBuilder: (context, index) {
-              return ItemIcon(
-                index: index,
-                emoji: emojis[index],
-                removeEmoji: _deleteEmoji,
-                addEmoji: _addEmoji,
-                updateEmoji: _updateEmoji,
-              );
-            }),
+        child: FutureBuilder<List<Emoji>>(
+          future: getAllEmojis(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+              return ListView.builder(
+                  itemCount: snapshot.data?.length,
+                  itemBuilder: (context, index) {
+                    return ItemIcon(
+                      index: index,
+                      removeEmoji: _deleteEmoji,
+                      addEmoji: _addEmoji,
+                      updateEmoji: _updateEmoji,
+                      hEmoji: snapshot.data![index],
+                    );
+                  });
+            } else if (snapshot.hasError) {
+              return Text('${snapshot.error}');
+            }
+            return const CircularProgressIndicator();
+          },
+        ),
       )),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {

@@ -4,21 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_emoji/flutter_emoji.dart';
 
 import 'create_update_page.dart';
+import 'model/h_emoji.dart';
 
 class ItemIcon extends StatelessWidget {
   final int index;
-  final Emoji emoji;
+  final h_Emoji hEmoji;
   final Function(String) removeEmoji;
   final Function(String) addEmoji;
   final Function(int, String) updateEmoji;
 
   const ItemIcon(
       {super.key,
-      required this.emoji,
       required this.removeEmoji,
       required this.addEmoji,
       required this.updateEmoji,
-      required this.index});
+      required this.index, required this.hEmoji});
 
   void update(BuildContext context) async {
     final result = await Navigator.push(
@@ -26,7 +26,7 @@ class ItemIcon extends StatelessWidget {
       MaterialPageRoute(
         builder: (context) => CreateUpdateEmojiPage(
           mode: 'update',
-          emojiNameToUpdate: emoji.name,
+          emojiNameToUpdate: hEmoji.name,
         ),
       ),
     );
@@ -38,6 +38,9 @@ class ItemIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var parser = EmojiParser();
+    var emoji = parser.getEmoji(hEmoji.name);
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [

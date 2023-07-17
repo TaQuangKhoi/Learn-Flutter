@@ -1,7 +1,10 @@
+import 'package:emotion_icon/utils/database_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_emoji/flutter_emoji.dart';
 
 import 'dart:developer';
+
+import 'model/h_emoji.dart';
 
 class CreateUpdateEmojiPage extends StatefulWidget {
   const CreateUpdateEmojiPage(
@@ -68,8 +71,12 @@ class _CreateUpdateEmojiPageState extends State<CreateUpdateEmojiPage> {
     log('emojiNameOrCode: $emojiNameOrCode');
   }
 
-  void submit() {
+  void submit() async {
     if (widget.mode == 'create') {
+      var newMoji = const h_Emoji('coffee');
+
+      await insertEmoji(newMoji);
+
       Navigator.pop(context, emojiNameOrCode);
     } else {
       Navigator.pop(context, [
