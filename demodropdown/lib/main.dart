@@ -50,6 +50,11 @@ class DemoDropdownButton extends StatefulWidget {
 }
 
 class _DemoDropdownButtonState extends State<DemoDropdownButton> {
+  var items = ['One', 'Two', 'Three', 'Four', 'Five'];
+
+  String _selectedOption = 'One';
+  String _selectedOptionSubmit = 'One';
+
   @override
   Widget build(BuildContext context) {
     return const Placeholder();
