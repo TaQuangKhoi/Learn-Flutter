@@ -115,6 +115,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.9.1"
+  momentum:
+    dependency: "direct main"
+    description:
+      name: momentum
+      sha256: a77b2203a0aea523ecb5997739502abffea022ebb2ec097e12031aaf85db0e23
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.1"
   path:
     dependency: transitive
     description:
