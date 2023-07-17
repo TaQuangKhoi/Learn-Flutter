@@ -79,6 +79,13 @@ class _DemoDropdownButtonState extends State<DemoDropdownButton> {
             color: Colors.teal,
           ),
         ),
+        Text(
+          'Selected option: $_selectedOption',
+          style: const TextStyle(
+            fontSize: 30,
+            color: Colors.teal,
+          ),
+        )
       ],
     ));
   }
