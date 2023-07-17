@@ -73,9 +73,9 @@ class _CreateUpdateEmojiPageState extends State<CreateUpdateEmojiPage> {
 
   void submit() async {
     if (widget.mode == 'create') {
-      var newMoji = const h_Emoji('coffee');
-
-      await insertEmoji(newMoji);
+      // var newMoji = const h_Emoji('coffee');
+      //
+      // await insertEmoji(newMoji);
 
       Navigator.pop(context, emojiNameOrCode);
     } else {
