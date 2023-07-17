@@ -57,7 +57,13 @@ class _DemoSliderState extends State<DemoSlider> {
               });
             },
           ),
-          Text('Slider value: $_sliderValueSubmit'),
+          Text('Slider value: $_sliderValue'),
+          ElevatedButton(onPressed: () {
+            setState(() {
+              _sliderValueSubmit = _sliderValue;
+            });
+          }, child: const Text('Submit')),
+          Text('Slider value submit: $_sliderValueSubmit'),
         ],
       ),
     );
