@@ -96,16 +96,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
-    // emojis = <Emoji>[
-    //   Emoji('coffee', '☕'),
-    //   Emoji('heart', '❤️'),
-    //   Emoji('party', '🎉'),
-    //   Emoji('sun', '☀️'),
-    //   Emoji('moon', '🌙'),
-    //   Emoji('star', '⭐'),
-    //   Emoji('cloud', '☁️'),
-    // ];
-
     emojis = <Emoji>[];
 
     // emojis = getAllEmojis() as List<Emoji>;
@@ -139,6 +129,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    log('build');
+
     return Scaffold(
       appBar: AppBar(
         // TRY THIS: Try changing the color here to a specific color (to
@@ -152,17 +144,27 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
           child: Container(
         margin: const EdgeInsets.all(6),
-        child: ListView.builder(
-            itemCount: emojis.length,
-            itemBuilder: (context, index) {
-              return ItemIcon(
-                index: index,
-                emoji: emojis[index],
-                removeEmoji: _deleteEmoji,
-                addEmoji: _addEmoji,
-                updateEmoji: _updateEmoji,
-              );
-            }),
+        child: FutureBuilder<List<Emoji>>(
+          future: getAllEmojis(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+              return ListView.builder(
+                  itemCount: snapshot.data?.length,
+                  itemBuilder: (context, index) {
+                    return ItemIcon(
+                      index: index,
+                      removeEmoji: _deleteEmoji,
+                      addEmoji: _addEmoji,
+                      updateEmoji: _updateEmoji,
+                      hEmoji: snapshot.data![index],
+                    );
+                  });
+            } else if (snapshot.hasError) {
+              return Text('${snapshot.error}');
+            }
+            return const CircularProgressIndicator();
+          },
+        ),
       )),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
