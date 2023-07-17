@@ -85,7 +85,17 @@ class _DemoDropdownButtonState extends State<DemoDropdownButton> {
             fontSize: 30,
             color: Colors.teal,
           ),
-        )
+        ),
+        ElevatedButton(
+            onPressed: () {
+              setState(() {
+                _selectedOptionSubmit = _selectedOption;
+              });
+            },
+            child: const Text(
+              'Submit',
+              style: TextStyle(fontSize: 30),
+            )),
       ],
     ));
   }
