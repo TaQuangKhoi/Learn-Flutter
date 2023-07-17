@@ -192,15 +192,7 @@ class _MyHomePageState extends State<MyHomePage> {
           final newEmojiName = await Navigator.pushNamed(context, '/create');
           log(newEmojiName.toString());
           if (newEmojiName != null) {
-            var _emoji = parser.get(newEmojiName.toString());
-            log("New emoji $_emoji");
-
-            h_Emoji emoji = h_Emoji(_emoji.name, 1, _emoji.code);
-
-            await addEmoji(emoji);
-            // setState(() {
-            //   emojis.add(parser.get(newEmoji.toString()));
-            // });
+            await addEmoji(newEmojiName.toString());
           }
         },
         tooltip: 'Add Emoji',

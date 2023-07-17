@@ -7,19 +7,22 @@ class h_Emoji {
   final int id;
   final String name; // heart
   final String code; // Example: ❤️
+  final String reference; // Example: 9kehIKskDW5xzP2AibkO
 
-  const h_Emoji(this.name, this.id, this.code);
+  const h_Emoji(this.name, this.id, this.code, this.reference);
 
   Map<String, dynamic> toMap() {
     return {
       'id': id,
       'name': name,
+      'code': code,
+      'reference': reference,
     };
   }
 
   @override
   String toString() {
-    return 'Emoji{id: $id, name: $name}';
+    return 'Emoji{id: $id, name: $name, code: $code, reference: $reference}';
   }
 }
 
