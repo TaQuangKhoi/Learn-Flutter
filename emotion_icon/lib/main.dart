@@ -1,14 +1,11 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:emotion_icon/utils/firebase_util.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import '../utils/firebase_util.dart';
 import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
 
-import 'package:emotion_icon/item_icon.dart';
+import '../item_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_emoji/flutter_emoji.dart';
-import 'package:path/path.dart';
-import 'package:sqflite/sqflite.dart';
 
 import 'create_update_page.dart';
 import 'model/h_emoji.dart';
@@ -192,12 +189,18 @@ class _MyHomePageState extends State<MyHomePage> {
       )),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          final newEmoji = await Navigator.pushNamed(context, '/create');
-          log(newEmoji.toString());
-          if (newEmoji != null) {
-            setState(() {
-              emojis.add(parser.get(newEmoji.toString()));
-            });
+          final newEmojiName = await Navigator.pushNamed(context, '/create');
+          log(newEmojiName.toString());
+          if (newEmojiName != null) {
+            var _emoji = parser.get(newEmojiName.toString());
+            log("New emoji $_emoji");
+
+            h_Emoji emoji = h_Emoji(_emoji.name, 1, _emoji.code);
+
+            await addEmoji(emoji);
+            // setState(() {
+            //   emojis.add(parser.get(newEmoji.toString()));
+            // });
           }
         },
         tooltip: 'Add Emoji',
