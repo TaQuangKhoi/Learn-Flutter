@@ -1,0 +1,6 @@
+package com.taquangkhoi.demoslider
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity() {
+}
